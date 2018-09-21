@@ -1,0 +1,15 @@
+{# templates/lucky/number.html.twig #}
+{# esto es un comentario#}
+
+{% include 'base.html.twig' %} {#este es el template base de la página, donde se definen <head> <body> <footer>
+                               todos los templates que vayan a ser una "pagina" en si (ya lo entendereis mas adelante)
+                               deberan incluir este template #}
+
+{% block body %}    {#si os fijais en el template base.html.twig vereis que hay definido un "block body", bien pues al
+                      utilizar nosotros ese tag aqui, le estamos diciendo a twig que todo lo que escribamos en este template
+                      será renderizado en el otro, potente no?#}
+
+{# para llamar a una variable que le hayamos pasado a la vista se utiliza "{{ nombre_de_la_variable }}" #}
+<h1>Your lucky number is {{ number }}</h1>
+
+{% endblock %}
