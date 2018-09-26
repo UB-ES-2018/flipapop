@@ -1,0 +1,10 @@
+.navbar{
+    box-shadow:  0px -5px 11px -4px rgba(0,0,0,1);
+    background-color: #ffffff;
+    height: 66px;
+}
+
+.round-search-bar{
+    border-radius: 10px; /* 5px rounded corners */
+
+}
