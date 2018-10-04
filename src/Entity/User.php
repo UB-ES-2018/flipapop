@@ -3,11 +3,13 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Serializable;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
-class User
+class User implements UserInterface, Serializable
 {
     /**
      * @ORM\Id()
@@ -31,10 +33,20 @@ class User
      */
     private $email;
 
+
+    private $plainPassword;
+
+    private $salt;
+
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $password;
+
+    public function __construct()
+    {
+        $this->salt = 'flipapop';
+    }
 
     public function getId(): ?int
     {
@@ -88,4 +100,66 @@ class User
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    /**
+     * @param mixed $plainPassword
+     */
+    public function setPlainPassword($plainPassword)
+    {
+        $this->plainPassword = $plainPassword;
+    }
+
+    public function eraseCredentials()
+    {
+    }
+
+    public function getRoles()
+    {
+        return array('ROLE_USER');
+    }
+
+    public function getSalt()
+    {
+        return $this->salt;
+    }
+
+    public function getUsername()
+    {
+        return $this->email;
+    }
+
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->name,
+            $this->surname,
+            $this->email,
+            $this->password,
+            $this->salt
+        ));
+    }
+
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->name,
+            $this->surname,
+            $this->email,
+            $this->password,
+            $this->salt,
+            // see section on salt below
+            // $this->salt
+            ) = unserialize($serialized, array('allowed_classes' => false));    }
+
+
 }
