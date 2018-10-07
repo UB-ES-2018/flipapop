@@ -1,0 +1,43 @@
+{% extends 'base/base.html.twig' %}
+
+{% block body %}
+
+    <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" >
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                                <div class="modal-header">
+                    Regístrate en flipapop!
+                </div>
+
+                <div class="modal-body">
+
+                    {{ form_start(form, {'attr': {'class': 'container'}}) }}
+
+                    {{ form_row(form.name, {'attr': {'class': 'text-field'}}) }}
+                    {{ form_row(form.surname,{'attr': {'class': 'content'}}) }}
+                    {{ form_row(form.email,{'attr': {'class': 'content'}}) }}
+                    {{ form_row(form.plainPassword,{'attr': {'class': 'content'}}) }}
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <div class="buttons">
+                        <button type="submit" class="btn btn-primary">Registrate</button>
+                        <button type="button" class="btn btn-secondary">Login</button>
+                    </div>
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+
+
+
+
+
+
