@@ -26,19 +26,25 @@ class UserType extends AbstractType
     {
         $builder->add('name', TextType::class, array(
             'required' => true,
-            'empty_data' => 'Ej: Pablo',
+            'attr' => array(
+                'placeholder' => 'James'
+            ),
             'constraints' => new NotBlank(['message' => 'Este campo es obligatorio'])
         ));
 
         $builder->add('surname', TextType::class, array(
             'required' => true,
-            'empty_data' => 'Ej: Palotes',
+            'attr' => array(
+                'placeholder' => 'Bond'
+            ),
             'constraints' => new NotBlank(['message' => 'Este campo es obligatorio'])
         ));
 
         $builder->add('email', TextType::class, array(
             'required' => true,
-            'empty_data' => 'Ej: pablo.palotes@somemail.com',
+            'attr' => array(
+                'placeholder' => 'doubleO7@mi6.uk'
+            ),
             'constraints' => new Email(['message' => 'Este campo debe ser un correo electronico'])
 
         ));
@@ -58,4 +64,5 @@ class UserType extends AbstractType
             'data_class' => User::class,
         ));
     }
+
 }
