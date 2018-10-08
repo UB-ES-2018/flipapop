@@ -5,10 +5,13 @@
                 <span class="input-group-text"></span>
             </div>
             <input type="text" class="form-control round-search-bar" placeholder="Search">
-
-            <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#registerModal">
-                Reg-log
-            </button>
+            {% if app.session.get('user') is null %}
+            <a class="btn" href="{{ path('register_user') }}">
+                Sign in
+            </a>
+            {% else %}
+            <a class="btn" href="">{{ app.session.get('user').getName()}}</a>
+            {% endif %}
         </div>
     </form>
 </nav>
