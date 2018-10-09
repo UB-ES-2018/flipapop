@@ -46,10 +46,6 @@ class User implements UserInterface, Serializable
      */
     private $password;
 
-    public function __construct()
-    {
-        $this->salt = 'flipapop';
-    }
 
     public function getId(): ?int
     {
@@ -131,7 +127,7 @@ class User implements UserInterface, Serializable
 
     public function getSalt()
     {
-        return $this->salt;
+
     }
 
     public function getUsername()
@@ -147,7 +143,6 @@ class User implements UserInterface, Serializable
             $this->surname,
             $this->email,
             $this->password,
-            $this->salt
         ));
     }
 
@@ -159,9 +154,6 @@ class User implements UserInterface, Serializable
             $this->surname,
             $this->email,
             $this->password,
-            $this->salt,
-            // see section on salt below
-            // $this->salt
             ) = unserialize($serialized, array('allowed_classes' => false));    }
 
 
