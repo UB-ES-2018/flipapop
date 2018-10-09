@@ -7,7 +7,7 @@
             <input type="text" class="form-control round-search-bar" placeholder="Search">
             {% if app.user is null %}
             <a class="btn-link" href="{{ path('register_user') }}">Sign in</a>
-                <span></span>
+                <span style="margin-left: 5px; margin-right: 5px ">or</span>
             <a class="btn-link" href="{{ path('login') }}">
                 Sign up</a>
             {% else %}
