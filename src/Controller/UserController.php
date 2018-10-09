@@ -5,11 +5,14 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\Type\UserType;
+use App\Security\LoginFormAuthenticator;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use function var_dump;
 
 
@@ -20,7 +23,7 @@ class UserController extends AbstractController
      *
      * @Route("/register", name="register_user", options={"expose"=true})
      */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder){
+    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $authenticatorHandler, LoginFormAuthenticator $formAuthenticator){
 
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
@@ -36,21 +39,37 @@ class UserController extends AbstractController
             $em->persist($user);
             $em->flush();
 
-            $session = $this->get('session');
-            $session->set('user', $user);
+            return $authenticatorHandler->authenticateUserAndHandleSuccess($user, $request, $formAuthenticator,'main' );
 
-            return $this->redirectToRoute('landing_page');
         }
 
 
-        return $this->render('modals/register.html.twig', array('form' => $form->createView()));
+        return $this->render('security/register.html.twig', array('form' => $form->createView()));
 
 
     }
 
     /**
      * @param Request $request
-     * @Route("/logout", name="logout_user")
+     * @Route("/login", name="login")
+     */
+    public function login(AuthenticationUtils $authenticationUtils)
+    {
+        // get the login error if there is one
+        $error = $authenticationUtils->getLastAuthenticationError();
+
+        // last username entered by the user
+        $lastUsername = $authenticationUtils->getLastUsername();
+
+        return $this->render('security/login.html.twig', array(
+            'last_username' => $lastUsername,
+            'error'         => $error,
+        ));
+    }
+
+    /**
+     * @param Request $request
+     * @Route("/logout", name="logout")
      */
     public function logout(Request $request){
         $this->get('session')->remove('user');

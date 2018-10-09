@@ -5,12 +5,13 @@
                 <span class="input-group-text"></span>
             </div>
             <input type="text" class="form-control round-search-bar" placeholder="Search">
-            {% if app.session.get('user') is null %}
-            <a class="btn" href="{{ path('register_user') }}">
-                Sign in
-            </a>
+            {% if app.user is null %}
+            <a class="btn-link" href="{{ path('register_user') }}">Sign in</a>
+                <span style="margin-left: 5px; margin-right: 5px ">or</span>
+            <a class="btn-link" href="{{ path('login') }}">
+                Sign up</a>
             {% else %}
-            <a class="btn" href="">{{ app.session.get('user').getName()}}</a>
+            <a class="btn-link" href="{{ path('logout') }}">{{ app.user.getName()}}</a>
             {% endif %}
         </div>
     </form>

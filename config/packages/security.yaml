@@ -1,10 +1,10 @@
 security:
     encoders:
         App\Entity\User:
-            algorithm: sha512
+            algorithm: bcrypt
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
-        our_db_provider:
+        users:
             entity:
                 class: App\Entity\User
                 property: email
@@ -14,6 +14,16 @@ security:
             security: false
         main:
             anonymous: true
+            guard:
+                authenticators:
+                  - App\Security\LoginFormAuthenticator
+
+            logout:
+                path: logout
+                target: landing_page
+            remember_me:
+                secret: '%kernel.secret%'
+                lifetime: 2592000
 
             # activate different ways to authenticate
 
