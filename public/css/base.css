@@ -8,3 +8,23 @@
     border-radius: 10px; /* 5px rounded corners */
 
 }
+
+.body{
+    padding-top: 100px;
+}
+
+.centered{
+    align-items: center;
+    justify-content: center;
+
+}
+
+.registerform{
+    padding-top: 15px;
+    box-shadow: 5px 5px 6px -3px #000000;
+    padding-bottom: 15px;
+    padding-left: 15px;
+    border: 2px solid #1C6EA4;
+    border-radius: 10px;
+}
+
