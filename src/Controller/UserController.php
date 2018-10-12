@@ -6,11 +6,13 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\Type\UserType;
 use App\Security\LoginFormAuthenticator;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use function var_dump;
@@ -76,6 +78,15 @@ class UserController extends AbstractController
         return $this->redirectToRoute('landing_page');
     }
 
+    /**
+     * @IsGranted("ROLE_USER")
+     * @param Request $request
+     * @Route("/profile", name="user_profile")
+     */
+    public function profile(Request $request){
+
+        return $this->render('profile.html.twig', array('user' => $this->getUser()));
+    }
 
 
 
