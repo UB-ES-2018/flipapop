@@ -7,6 +7,11 @@
         <input class="form-control form-control-sm mr-3" style="width: 300px" type="text" placeholder="Search Products" aria-label="Search">
         <i class="fa fa-search" aria-hidden="true"></i>
     </form>
+    {% if app.user is not null %}
+        <a class="btn btn-primary" type="button" href="{{ path('new_product') }}">
+            Upload product
+        </a>
+    {% endif %}
     {% if app.user is null %}
         <ul class="navbar-nav">
             <li class="nav-item">
