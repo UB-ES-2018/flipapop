@@ -3,5 +3,15 @@
 {% block body %}
 <div class="container">
     <h1>{{ user.name }} {{ user.surname }} profile page</h1>
+    <h3>
+        My description:
+        <h4>
+            {{ user.description }}
+        </h4>
+    </h3>
+
+    <a class="btn btn-primary" type="button" href="{{ path('edit_user_profile') }} ">Edit</a>
 </div>
+
+
 {% endblock %}

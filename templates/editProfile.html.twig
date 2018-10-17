@@ -1,0 +1,16 @@
+{% extends 'base/base.html.twig' %}
+
+{% block body %}
+<div class="container">
+    <h1>Editing {{ user.name }} {{ user.surname }} profile page</h1>
+    {{ form_errors(form) }}
+    {{ form_start(form, {'attr': {'class': 'container'}}) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.surname) }}
+    {{ form_row(form.description) }}
+    <button class="btn btn-primary" type="submit">Save changes</button>
+
+    {{ form_end(form) }}
+</div>
+
+{% endblock %}
