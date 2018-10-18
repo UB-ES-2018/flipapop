@@ -88,7 +88,17 @@ class UserController extends AbstractController
         return $this->render('profile.html.twig', array('user' => $this->getUser()));
     }
 
+    /**
+     * @IsGranted("ROLE_USER")
+     * @param Request $request
+     * @Route("/profile/edit", name="edit_profile")
+     */
+    public function editProfile(Request $request){
 
+        $form = $this->createForm(UserType::class, $this->getUser());
+
+        return $this->render('editProfile.html.twig', array('form' => $form->createView(), 'user' => $this->getUser()));
+    }
 
 
 }
