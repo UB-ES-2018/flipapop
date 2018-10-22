@@ -46,6 +46,11 @@ class User implements UserInterface, Serializable
      */
     private $password;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $description;
+
 
     public function getId(): ?int
     {
@@ -155,6 +160,18 @@ class User implements UserInterface, Serializable
             $this->email,
             $this->password,
             ) = unserialize($serialized, array('allowed_classes' => false));    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
 
 
 }
