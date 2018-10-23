@@ -1,7 +1,57 @@
 {% extends 'base/base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/profile.css') }}" >
+    {% endblock %}
 
 {% block body %}
-<div class="container">
-    <h1>{{ user.name }} {{ user.surname }} profile page</h1>
+
+<div class="wrapper">
+
+    <!-- Sidebar -->
+    <nav class="sidebar">
+        <ul class="list-unstyled components" >
+            <li {% if tab == 'edit' %}class="active"{% endif %}>
+                <a href="{{ path('user_profile',{'tab': 'edit' })}}">
+                    <div class="sidebar-button " align="center">
+                        <div class="dot-image">
+                            {%  if user.image is not null%}
+                                <img id="side-bar-profile-image" src="{{ vich_uploader_asset(user, 'imageFile') }}">
+                            {% endif %}
+                        </div>
+                        <div class="sidebar-button-name">
+                            <a>PROFILE</a>
+                        </div>
+                    </div>
+                </a>
+            </li>
+            <li {% if tab == 'new' or tab == 'products'%} class="active" {% endif %}>
+                <a href="{{  path('user_profile',{'tab': 'products' })}}" >
+                    <div class="sidebar-button" align="center">
+                        <div class="dot-image" style="padding-top: 7px">
+                            <i class="fas fa-list-ul" style="font-size: 20px"></i>
+                        </div>
+                        <div class="sidebar-button-name">
+                            <a>PRODUCTS</a>
+                        </div>
+                    </div>
+                </a>
+
+            </li>
+            <li>
+        </ul>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="profile-content">
+        {% if tab == 'edit' %}
+            {% include 'editProfile.html.twig' %}
+        {% elseif tab == 'products' %}
+            {% include 'userProducts.html.twig' %}
+        {% elseif tab == 'new' %}
+            {% include 'newProduct.html.twig' %}
+        {% endif %}
+    </div>
+
 </div>
 {% endblock %}

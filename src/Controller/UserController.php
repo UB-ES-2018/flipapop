@@ -4,8 +4,10 @@ namespace App\Controller;
 
 
 use App\Entity\User;
+use App\Form\Type\UserProfileType;
 use App\Form\Type\UserType;
 use App\Security\LoginFormAuthenticator;
+use function is_null;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -81,14 +83,26 @@ class UserController extends AbstractController
     /**
      * @IsGranted("ROLE_USER")
      * @param Request $request
-     * @Route("/profile", name="user_profile")
+     * @Route("/profile/{tab}", name="user_profile")
      */
-    public function profile(Request $request){
+    public function profile(Request $request, $tab = 'edit'){
 
-        return $this->render('profile.html.twig', array('user' => $this->getUser()));
+
+        $form = $this->createForm(UserProfileType::class, $this->getUser());
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($this->getUser());
+            $em->flush();
+        }
+        return $this->render('profile.html.twig',
+            array(
+                'form' => $form->createView(),
+                'user' => $this->getUser(),
+                'tab' => $tab,
+
+            ));
     }
-
-
 
 
 }

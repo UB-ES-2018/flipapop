@@ -6,6 +6,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "doctrine/orm": "^2.6",
+        "friendsofsymfony/elastica-bundle": "^5.0",
         "sensio/framework-extra-bundle": "^5.2",
         "symfony/asset": "*",
         "symfony/console": "*",
@@ -19,7 +20,8 @@
         "symfony/validator": "*",
         "symfony/var-dumper": "*",
         "symfony/yaml": "*",
-        "twig/twig": "^2.0"
+        "twig/twig": "^2.0",
+        "vich/uploader-bundle": "^1.8"
     },
     "require-dev": {
         "sensiolabs/security-checker": "^4.1",
