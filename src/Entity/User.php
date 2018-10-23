@@ -54,6 +54,11 @@ class User implements UserInterface, Serializable
     private $password;
 
     /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $description;
+  
+    /*
      * @ORM\OneToMany(targetEntity="App\Entity\Product", mappedBy="usuario", orphanRemoval=true)
      */
     private $products;
@@ -121,6 +126,7 @@ class User implements UserInterface, Serializable
         $this->products = new ArrayCollection();
         $this->image = new EmbeddedFile();
     }
+
 
 
     public function getId(): ?int
@@ -232,6 +238,17 @@ class User implements UserInterface, Serializable
             $this->password,
             ) = unserialize($serialized, array('allowed_classes' => false));    }
 
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
+    }
+  
     /**
      * @return Collection|Product[]
      */
