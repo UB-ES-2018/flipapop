@@ -5,6 +5,7 @@
     {% endblock %}
 
 {% block body %}
+
 <div class="wrapper">
 
     <!-- Sidebar -->
@@ -53,19 +54,4 @@
     </div>
 
 </div>
-
-
-{% endblock %}
-
-{% block more_javascripts %}
-    {{ parent() }}
-    <script type="text/javascript">
-        function redirect_profile(){
-            window.location(Routing.generate('user_profile', 'edit'));
-        }
-
-        function redirect_products(){
-            window.location({{ path('user_profile', {'tab': 'products'}) }})
-        }
-    </script>
 {% endblock %}

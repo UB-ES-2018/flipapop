@@ -3,8 +3,8 @@
     <a class="navbar-brand" href="{{ path('landing_page') }}">Flipapop</a>
 
     <!-- Search form -->
-    <form class="form-inline md-form form-sm active-cyan-2">
-        <input class="form-control form-control-sm mr-3" style="width: 300px" type="text" placeholder="Search Products" aria-label="Search">
+    <form class="form-inline md-form form-sm active-cyan-2" method="post" action="{{ path('landing_page') }}">
+        <input class="form-control form-control-sm mr-3" style="width: 300px" id="searchbar" type="text" placeholder="Search Products" aria-label="Search">
         <i class="fa fa-search" aria-hidden="true"></i>
     </form>
     {% if app.user is not null %}
