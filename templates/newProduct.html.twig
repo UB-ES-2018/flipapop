@@ -1,26 +1,28 @@
-{% extends 'base/base.html.twig' %}
 
-{% block body %}
 
-    <div class="panel-body">
+
+<div class="profile-block">
+    <div class="row-fluid">
+
+        {{ form_errors(form) }}
+        {{ form_start(form, {'attr': {'class': 'container'}}) }}
         <div class="row-fluid">
-
-            {{ form_errors(form) }}
-            {{ form_start(form, {'attr': {'class': 'container'}}) }}
-            <div class="row-fluid">
-                {{ form_row(form.name) }}
-                {{ form_row(form.price) }}
-            </div>
-            <div class="row-fluid text-field">
-                {{ form_row(form.description) }}
-            </div>
-
-            <button class="btn btn-primary" type="submit">Publish</button>
-            {{ form_end(form) }}
-
+            {{ form_row(form.name) }}
+            {{ form_row(form.price) }}
         </div>
+        <div class="row-fluid text-field">
+            {{ form_row(form.description) }}
+        </div>
+        <div class="row-fluid">
+            {{ form_row(form.imageFile) }}
+        </div>
+
+        <button class="btn btn-primary" type="submit">Publish</button>
+        {{ form_end(form) }}
+        <div class="spacer"></div>
     </div>
+</div>
 
 
-{% endblock %}
+
 
