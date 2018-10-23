@@ -1,4 +1,9 @@
 <div class="container">
+    <div class="profile-header" align="right">
+        <div class="logout-button">
+            <a class="btn btn-text" href="{{ path('logout') }}">Logout</a>
+        </div>
+    </div>
     {{ form_start(form, {'attr': {'class': 'container'}}) }}
     {{ form_errors(form) }}
     <div class="profile-block">
@@ -33,6 +38,18 @@
             <div class="col-md-7" align="left">
                 {{ form_errors(form.surname) }}
                 {{ form_widget(form.surname, {'attr': {'style': 'max-width: 250px'}}) }}
+            </div>
+        </div>
+        <div class="spacer"></div>
+    </div>
+    <div class="profile-block" align="center">
+        <div class="row" align="center">
+            <div class="col-md-5" align="right">
+                {{ form_label(form.description) }}:
+            </div>
+            <div class="col-md-7" align="left">
+                {{ form_errors(form.description) }}
+                {{ form_widget(form.description, {'attr': {'style': 'max-width: 250px; height: 150px'}}) }}
             </div>
         </div>
         <div class="spacer"></div>

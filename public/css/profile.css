@@ -56,7 +56,7 @@
     border-color: #fff;
 }
 
-.dot-image:hover{
+.sidebar-button:hover #products{
     background-color: #13c1ac;
 }
 
@@ -147,4 +147,35 @@
     height: 35px;
     width: 35px;
 
+}
+
+.logout-button{
+    width: 100px;
+    height: 40px;
+    border-radius: 40px;
+    border: 1px solid #13c1ac;
+    padding-right: 15px;
+    padding-top: 2px;
+    transition: all .2s ease-in-out;
+}
+
+.logout-button:hover{
+    background-color: #fb6d6a;
+    color: #fff;
+    border: 1px solid #fb6d6a;
+}
+.logout-button a{
+    font-weight: lighter;
+}
+
+.logout-button a{
+    color: #6a6e72;
+}
+
+.logout-button:hover a{
+    color:#fff;
+}
+
+.profile-header{
+    padding-bottom: 10px;
 }

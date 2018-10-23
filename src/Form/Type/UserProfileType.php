@@ -12,6 +12,7 @@ use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -42,6 +43,11 @@ class UserProfileType extends AbstractType
         $builder->add('surname', TextType::class, array(
             'required' => true,
             'constraints' => new NotBlank(['message' => 'Este campo es obligatorio'])
+        ));
+
+        $builder->add('description', TextareaType::class, array(
+            'required' => false
+
         ));
 
         $builder->add('imageFile', VichImageType::class, array(

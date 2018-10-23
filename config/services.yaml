@@ -32,4 +32,5 @@ services:
     app.security.login_form_authenticator:
             class: App\Security\LoginFormAuthenticator
             autowire: true
+
     FOS\ElasticaBundle\Finder\TransformedFinder: '@fos_elastica.finder.app.product'
