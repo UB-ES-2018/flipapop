@@ -35,11 +35,17 @@ class ProductController extends AbstractController
             $em->persist($product);
             $em->flush();
 
-            return $this->redirectToRoute('landing_page');
+            return $this->redirectToRoute('user_profile', ['tab' => 'products']);
 
         }
 
-        return $this->render('newProduct.html.twig', array('form' => $form->createView()));
+
+        return $this->render('profile.html.twig',
+            array(
+                'form' => $form->createView(),
+                'user' => $this->getUser(),
+                'tab' => 'new'
+            ));
     }
 
 }

@@ -18,6 +18,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use const T_EXIT;
+use const T_EXTENDS;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 /**
  * Created by PhpStorm.
@@ -31,9 +34,21 @@ class UserProfileType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $builder->add('name', TextType::class, array(
+            'required' => true,
+            'constraints' => new NotBlank(['message' => 'Este campo es obligatorio'])
+        ));
+
+        $builder->add('surname', TextType::class, array(
+            'required' => true,
+            'constraints' => new NotBlank(['message' => 'Este campo es obligatorio'])
+        ));
 
         $builder->add('imageFile', VichImageType::class, array(
             'required' => false,
+            'allow_delete' => false,
+            'download_link' => false,
+            'image_uri' => false
         ));
 
 
