@@ -1,12 +1,16 @@
 <div class="card">
-    <div class="image-holder"></div>
+    <div class="image-holder">
+        {%  if product.image is not null%}
+            <img id="side-bar-profile-image" src="{{ vich_uploader_asset(product, 'imageFile') }}">
+        {% endif %}
+    </div>
     <div class="card-bottom">
-        <div class="price-holder"> product.price €</div>
+        <div class="price-holder"> {{product.price}}€</div>
         <div class="name-holder">
-            product.name
+           {{ product.name }}
         </div>
         <div class="description-holder">
-            product.description
+            {{ product.description }}
         </div>
     </div>
 </div>

@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 
+use FOS\ElasticaBundle\Finder\TransformedFinder;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use function sizeof;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -21,10 +23,13 @@ class BaseController extends AbstractController
 
         $searchData = $request->get('searchbar');
 
-        if(!is_null($searchData)){
+        $products = [];
+        if(!is_null($searchData) && $searchData !== ''){
             $products = $finder->find($searchData);
-        }else{
-            $products = $this->getDoctrine()->getManager()->getRepository('App: Product')-> findAll();
+
+        }
+        if(sizeof($products) == 0){
+            $products = $this->getDoctrine()->getManager()->getRepository('App:Product')-> findAll();
         }
 
         return $this->render('landingPage.html.twig', ['products' => $products]);

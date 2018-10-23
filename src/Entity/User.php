@@ -58,7 +58,7 @@ class User implements UserInterface, Serializable
      */
     private $description;
   
-    /*
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Product", mappedBy="usuario", orphanRemoval=true)
      */
     private $products;
@@ -247,6 +247,7 @@ class User implements UserInterface, Serializable
     public function setDescription(?string $description): self
     {
         $this->description = $description;
+        return $this;
     }
   
     /**
