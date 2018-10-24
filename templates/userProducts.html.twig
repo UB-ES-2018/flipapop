@@ -1,0 +1,26 @@
+<div class="container">
+    <a href="{{ path('new_product') }}">
+        <div class="new-product-block">
+            <div class="row">
+                <div class="col-md-1">
+                    <div class="plus-block">
+                        <div class="plus-circle">
+                            <i class="fas fa-plus" style="font-size: 25px; color: white"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-10">
+                    <div class="new-product-desc" align="center">
+                        Upload a new product
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a>
+
+    {% for product in user.products %}
+    <div class="product-block">
+
+    </div>
+    {% endfor %}
+</div>

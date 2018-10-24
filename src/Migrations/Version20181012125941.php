@@ -8,15 +8,16 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20181003141054 extends AbstractMigration
+final class Version20181012125941 extends AbstractMigration
 {
     public function up(Schema $schema) : void
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'postgresql', 'Migration can only be executed safely on \'postgresql\'.');
 
-        $this->addSql('CREATE SEQUENCE user_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
-        $this->addSql('CREATE TABLE "user" (id INT NOT NULL, name VARCHAR(255) NOT NULL, surname VARCHAR(255) NOT NULL, email VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('ALTER TABLE product ADD usuario_id INT NOT NULL');
+        $this->addSql('ALTER TABLE product ADD CONSTRAINT FK_D34A04ADDB38439E FOREIGN KEY (usuario_id) REFERENCES users (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('CREATE INDEX IDX_D34A04ADDB38439E ON product (usuario_id)');
     }
 
     public function down(Schema $schema) : void
@@ -25,7 +26,8 @@ final class Version20181003141054 extends AbstractMigration
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'postgresql', 'Migration can only be executed safely on \'postgresql\'.');
 
         $this->addSql('CREATE SCHEMA public');
-        $this->addSql('DROP SEQUENCE user_id_seq CASCADE');
-        $this->addSql('DROP TABLE "user"');
+        $this->addSql('ALTER TABLE product DROP CONSTRAINT FK_D34A04ADDB38439E');
+        $this->addSql('DROP INDEX IDX_D34A04ADDB38439E');
+        $this->addSql('ALTER TABLE product DROP usuario_id');
     }
 }

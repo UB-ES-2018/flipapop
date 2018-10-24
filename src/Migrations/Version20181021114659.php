@@ -8,14 +8,15 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20181008212227 extends AbstractMigration
+final class Version20181021114659 extends AbstractMigration
 {
     public function up(Schema $schema) : void
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'postgresql', 'Migration can only be executed safely on \'postgresql\'.');
 
-        $this->addSql('CREATE UNIQUE INDEX UNIQ_1483A5E9E7927C74 ON users (email)');
+        $this->addSql('ALTER TABLE product ALTER updated_at DROP NOT NULL');
+        $this->addSql('ALTER TABLE users ALTER updated_at DROP NOT NULL');
     }
 
     public function down(Schema $schema) : void
@@ -24,6 +25,7 @@ final class Version20181008212227 extends AbstractMigration
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'postgresql', 'Migration can only be executed safely on \'postgresql\'.');
 
         $this->addSql('CREATE SCHEMA public');
-        $this->addSql('DROP INDEX UNIQ_1483A5E9E7927C74');
+        $this->addSql('ALTER TABLE users ALTER updated_at SET NOT NULL');
+        $this->addSql('ALTER TABLE product ALTER updated_at SET NOT NULL');
     }
 }
