@@ -87,6 +87,11 @@ class User implements UserInterface, Serializable
     private $updatedAt;
 
     /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Product", inversedBy="likedUsers")
+     */
+    private $likedProducts;
+
+    /**
      * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
      * of 'UploadedFile' is injected into this setter to trigger the  update. If this
      * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
@@ -125,6 +130,7 @@ class User implements UserInterface, Serializable
     {
         $this->products = new ArrayCollection();
         $this->image = new EmbeddedFile();
+        $this->likedProducts = new ArrayCollection();
     }
 
 
@@ -276,6 +282,32 @@ class User implements UserInterface, Serializable
             if ($product->getUsuario() === $this) {
                 $product->setUsuario(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Product[]
+     */
+    public function getLikedProducts(): Collection
+    {
+        return $this->likedProducts;
+    }
+
+    public function addLikedProduct(Product $likedProduct): self
+    {
+        if (!$this->likedProducts->contains($likedProduct)) {
+            $this->likedProducts[] = $likedProduct;
+        }
+
+        return $this;
+    }
+
+    public function removeLikedProduct(Product $likedProduct): self
+    {
+        if ($this->likedProducts->contains($likedProduct)) {
+            $this->likedProducts->removeElement($likedProduct);
         }
 
         return $this;
