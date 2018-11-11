@@ -4,9 +4,11 @@
 
     <div class="row">
         {% for product in products %}
-            <div class="col-md-2 cardholder">
-                {% include 'cards/productCard.html.twig' %}
-            </div>
+            {% if product.puedeVer(user) %}
+                <div class="col-md-2 cardholder">
+                    {% include 'cards/productCard.html.twig' %}
+                </div>
+            {% endif %}
         {% endfor %}
     </div>
 {% endblock %}
