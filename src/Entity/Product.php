@@ -80,7 +80,7 @@ class Product
     public function __construct()
     {
         $this->image = new EmbeddedFile();
-        $this->visibility = 1;
+        $this->visibility = $this::VISIBLE_ALL;
     }
 
     /**
@@ -194,11 +194,10 @@ class Product
      */
     public function canView(?User $user): ?bool
     {
-        if($this->visibility = VISIBLE_ALL OR
-            ($this->visibility = VISIBLE_LOGGED AND $this->getUser()) OR
+        if($this->visibility = $this::VISIBLE_ALL OR
+            ($this->visibility = $this::VISIBLE_LOGGED AND $this->getUser()) OR
                 $this->getUser() === $user)
             return true;
-
         return false;
     }
 }
