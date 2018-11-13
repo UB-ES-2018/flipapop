@@ -1,0 +1,38 @@
+<div class="row justify-content-center align-items-center">
+    <div class="col">
+        <div class="image-block">
+            {%  if product.image is not null%}
+                <img class="image-block-image" src="{{ vich_uploader_asset(product, 'imageFile') }}">
+            {% endif %}
+        </div>
+
+    </div>
+
+    <div class="col">
+        {{ product.price }}$
+    </div>
+    <div class="col">
+        {{ product.name }}
+    </div>
+
+    {% if tab == 'products' %}
+    <div class="col" id="visibility-desc">
+        <span><b>Visibilidad:</b></span>
+        <span id="visibility-desc{{ product.id }}">
+            {% if  product.visibility == 1%}
+                Todos
+            {% elseif product.visibility == 2 %}
+                Logueados
+            {% elseif product.visibility == 3 %}
+                Solo yo
+            {% endif %}
+        </span>
+         <span><a class="actionButton" data-id="{{ product.id }}" data-toggle="dropdown" href="#" title="Editar visiblididad"><i class="fas fa-caret-down"></i></a></span>
+    </div>
+    {% else %}
+    <div class="col">
+        {{ product.description }}
+    </div>
+    {% endif %}
+
+</div>

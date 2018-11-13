@@ -4,13 +4,42 @@
 
     <div class="row">
         {% for product in products %}
-            <div class="col-md-2 cardholder">
-                {% include 'cards/productCard.html.twig' %}
-            </div>
+            {% if product.canView(app.user) %}
+                <div class="col-md-2 cardholder">
+                  {% include 'cards/productCard.html.twig' %}
+                </div>
+            {% endif %}
         {% endfor %}
     </div>
 {% endblock %}
 
 {% block javascripts %}
+<script type="text/javascript">
 
+    $('.fa-heart').click(function (event) {
+        event.preventDefault();
+        var id = $(this).data('id');
+        var heart = $(this);
+        $.ajax({
+            type: "POST",
+            url: '{{ path('ajax_like_product') }}',
+            data: {id: id},
+            dataType: "json"
+        }).done(function (data) {
+            if(data.liked){
+                console.log("llega");
+                heart.removeClass('far');
+                heart.addClass('fas liked');
+            }else{
+                console.log("llega2");
+                heart.removeClass('fas');
+                heart.removeClass('liked');
+                heart.addClass('far');
+            }
+            heart.parent().find(".n-likes").html(data.nlikes)
+        });
+    });
+
+
+</script>
 {% endblock %}

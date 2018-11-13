@@ -20,7 +20,16 @@
 
     {% for product in user.products %}
     <div class="product-block">
-
+        {% include "productBlock.html.twig" %}
     </div>
     {% endfor %}
+
+    <input type="hidden" id="lastProduct" value="=">
+    <div id="visibilityMenu" class="dropdown-menu" role="menu" style="padding-left: 8px">
+        <li><a tabindex="-1" class="visibility-button" data-id="" data-visibility="1" >Todos</a></li>
+        <li><a tabindex="-1" class="visibility-button" data-id="" data-visibility="2">Logueados</a></li>
+        <li><a tabindex="-1" class="visibility-button" data-id="" data-visibility="3">Solo yo</a></li>
+
+    </div>
+
 </div>

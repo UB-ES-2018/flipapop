@@ -12,6 +12,7 @@ namespace App\Form\Type;
 use App\Entity\Product;
 use Doctrine\DBAL\Types\FloatType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -48,11 +49,27 @@ class ProductType extends AbstractType
 
         ));
 
+        $builder->add('visibility', ChoiceType::class, array(
+            'required' => true,
+            'empty_data' => false,
+            'choices' => $this->getVisibilidad(),
+            'constraints' => new NotBlank(['message' => 'Este campo es obligatorio'])
+
+        ));
+
         $builder->add('imageFile', VichImageType::class, array(
             'required' => false,
         ));
 
 
+    }
+
+    private function getVisibilidad(){
+        return array(
+            "Todos" => Product::VISIBLE_ALL,
+            "Logueados" => Product::VISIBLE_LOGGED,
+            "Solo yo" => Product::VISIBLE_ME,
+        );
     }
 
     public function configureOptions(OptionsResolver $resolver)
