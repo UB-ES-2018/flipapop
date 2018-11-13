@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use function is_null;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Vich\UploaderBundle\Entity\File as EmbeddedFile;
@@ -194,10 +195,9 @@ class Product
      */
     public function canView(?User $user): ?bool
     {
-        if($this->visibility = $this::VISIBLE_ALL OR
-            ($this->visibility = $this::VISIBLE_LOGGED AND $this->getUser()) OR
-                $this->getUser() === $user)
-            return true;
+        if($this->getVisibility() === self::VISIBLE_ALL) return true;
+        if($this->getVisibility() === self::VISIBLE_LOGGED and !is_null($user)) return true;
+        if($this->getVisibility() === self::VISIBLE_ME and $user->getId() === $this->usuario->getId())return true;
         return false;
     }
 }
