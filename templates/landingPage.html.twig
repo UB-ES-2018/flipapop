@@ -12,5 +12,32 @@
 {% endblock %}
 
 {% block javascripts %}
+<script type="text/javascript">
 
+    $('.fa-heart').click(function (event) {
+        event.preventDefault();
+        var id = $(this).data('id');
+        var heart = $(this);
+        $.ajax({
+            type: "POST",
+            url: '{{ path('ajax_like_product') }}',
+            data: {id: id},
+            dataType: "json"
+        }).done(function (data) {
+            if(data.liked){
+                console.log("llega");
+                heart.removeClass('far');
+                heart.addClass('fas liked');
+            }else{
+                console.log("llega2");
+                heart.removeClass('fas');
+                heart.removeClass('liked');
+                heart.addClass('far');
+            }
+            heart.parent().find(".n-likes").html(data.nlikes)
+        });
+    });
+
+
+</script>
 {% endblock %}

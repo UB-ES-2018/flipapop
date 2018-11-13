@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -65,9 +67,15 @@ class Product
      */
     private $updatedAt;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="likedProducts")
+     */
+    private $likedUsers;
+
     public function __construct()
     {
         $this->image = new EmbeddedFile();
+        $this->likedUsers = new ArrayCollection();
     }
 
     /**
@@ -154,6 +162,43 @@ class Product
     public function setUsuario(?User $usuario): self
     {
         $this->usuario = $usuario;
+
+        return $this;
+    }
+
+    public function isLikedBy(User $user){
+        foreach ($this->likedUsers as $u){
+            if($u->getId() === $user->getId()){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getLikedUsers(): Collection
+    {
+        return $this->likedUsers;
+    }
+
+    public function addLikedUser(User $likedUser): self
+    {
+        if (!$this->likedUsers->contains($likedUser)) {
+            $likedUser->addLikedProduct($this);
+            $this->likedUsers->add($likedUser);
+        }
+
+        return $this;
+    }
+
+    public function removeLikedUser(User $likedUser): self
+    {
+        if ($this->likedUsers->contains($likedUser)) {
+            $this->likedUsers->removeElement($likedUser);
+            $likedUser->removeLikedProduct($this);
+        }
 
         return $this;
     }
