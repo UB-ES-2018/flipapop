@@ -8,8 +8,20 @@
 
 namespace App\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 
-class AjaxController
+class AjaxController extends AbstractController
 {
+    /**
+     * @Route("/producto/visibilidad", name="ajax_producto_visibilidad", options={"expose"=true})
+     */
+    public function cambiarVisibilidadProducto(Request $request){
+
+        $productID = $request->get('Product');
+        $visibility = $request->get('Visibility');
+        $Product = $this->getDoctrine()->getManager()->getRepository('App:Product')->find($productID);
+        $Product->setVisibility($visibility);
+    }
 
 }
