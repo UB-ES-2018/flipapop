@@ -298,7 +298,8 @@ class User implements UserInterface, Serializable
     public function addLikedProduct(Product $likedProduct): self
     {
         if (!$this->likedProducts->contains($likedProduct)) {
-            $this->likedProducts[] = $likedProduct;
+            $likedProduct->addLikedUser($this);
+            $this->likedProducts->add($likedProduct);
         }
 
         return $this;
@@ -308,6 +309,7 @@ class User implements UserInterface, Serializable
     {
         if ($this->likedProducts->contains($likedProduct)) {
             $this->likedProducts->removeElement($likedProduct);
+            $likedProduct->removeLikedUser($this);
         }
 
         return $this;

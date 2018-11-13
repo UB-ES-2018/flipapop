@@ -74,6 +74,7 @@
 }
 
 .product-block{
+    padding-right: 5px;
     background-color: #fff;
     border-radius: 10px;
     border: 1px solid #eceff1;

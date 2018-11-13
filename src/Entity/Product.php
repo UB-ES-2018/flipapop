@@ -166,6 +166,15 @@ class Product
         return $this;
     }
 
+    public function isLikedBy(User $user){
+        foreach ($this->likedUsers as $u){
+            if($u->getId() === $user->getId()){
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * @return Collection|User[]
      */
@@ -177,8 +186,8 @@ class Product
     public function addLikedUser(User $likedUser): self
     {
         if (!$this->likedUsers->contains($likedUser)) {
-            $this->likedUsers[] = $likedUser;
             $likedUser->addLikedProduct($this);
+            $this->likedUsers->add($likedUser);
         }
 
         return $this;

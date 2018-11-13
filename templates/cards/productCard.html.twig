@@ -13,7 +13,14 @@
             {{ product.description }}
         </div>
         <div class="like-holder" align="right">
-            <i class="far fa-heart fa-2x"></i>
+            <span class="n-likes">
+                {{ product.likedUsers | length }}
+            </span>
+            {% if product.isLikedBy(app.user) %}
+                <i data-id="{{ product.id }}" class="fas fa-heart liked"></i>
+            {% else %}
+                <i data-id="{{ product.id }}" class="far fa-heart"></i>
+            {% endif %}
         </div>
     </div>
 </div>
