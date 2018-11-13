@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use function is_null;
 use Symfony\Component\HttpFoundation\File\File;
@@ -67,6 +69,7 @@ class Product
     private $updatedAt;
 
     /**
+     *
      * NOTE: The value will be between 1 and 3.
      *
      * @ORM\Column(type="integer")
@@ -77,11 +80,17 @@ class Product
     const VISIBLE_LOGGED = 2;
     const VISIBLE_ME = 3;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="likedProducts")
+     */
+    private $likedUsers;
+
 
     public function __construct()
     {
         $this->image = new EmbeddedFile();
         $this->visibility = $this::VISIBLE_ALL;
+        $this->likedUsers = new ArrayCollection();
     }
 
     /**
@@ -172,6 +181,7 @@ class Product
         return $this;
     }
 
+
     public function getVisibility(): ?int
     {
         return $this->visibility;
@@ -180,9 +190,35 @@ class Product
     public function setVisibility(int $visibility): self
     {
         $this->visibility = $visibility;
+    }
+  
+    public function isLikedBy(User $user){
+        foreach ($this->likedUsers as $u){
+            if($u->getId() === $user->getId()){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getLikedUsers(): Collection
+    {
+        return $this->likedUsers;
+    }
+
+    public function addLikedUser(User $likedUser): self
+    {
+        if (!$this->likedUsers->contains($likedUser)) {
+            $likedUser->addLikedProduct($this);
+            $this->likedUsers->add($likedUser);
+        }
 
         return $this;
     }
+
 
     /**
      * Return true IF:
@@ -199,5 +235,16 @@ class Product
         if($this->getVisibility() === self::VISIBLE_LOGGED and !is_null($user)) return true;
         if($this->getVisibility() === self::VISIBLE_ME and !is_null($user) and $user->getId() === $this->usuario->getId())return true;
         return false;
+    }
+  
+    public function removeLikedUser(User $likedUser): self
+    {
+        if ($this->likedUsers->contains($likedUser)) {
+            $this->likedUsers->removeElement($likedUser);
+            $likedUser->removeLikedProduct($this);
+        }
+
+        return $this;
+
     }
 }

@@ -38,7 +38,19 @@
                 </a>
 
             </li>
-            <li>
+            <li {% if tab == 'liked'%} class="active" {% endif %}>
+                <a href="{{  path('user_profile',{'tab': 'liked' })}}" >
+                    <div class="sidebar-button" align="center">
+                        <div class="dot-image" id="products" style="padding-top: 7px">
+                            <i class="far fa-heart" style="font-size: 20px"></i>
+                        </div>
+                        <div class="sidebar-button-name">
+                            <a>FAVOURITES</a>
+                        </div>
+                    </div>
+                </a>
+
+            </li>
         </ul>
     </nav>
 
@@ -50,6 +62,8 @@
             {% include 'userProducts.html.twig' %}
         {% elseif tab == 'new' %}
             {% include 'newProduct.html.twig' %}
+        {% elseif tab == 'liked' %}
+            {% include 'likedProducts.html.twig' %}
         {% endif %}
     </div>
 

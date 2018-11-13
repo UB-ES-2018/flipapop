@@ -15,6 +15,7 @@
         {{ product.name }}
     </div>
 
+    {% if tab == 'products' %}
     <div class="col" id="visibility-desc">
         <span><b>Visibilidad:</b></span>
         <span id="visibility-desc{{ product.id }}">
@@ -28,4 +29,10 @@
         </span>
          <span><a class="actionButton" data-id="{{ product.id }}" data-toggle="dropdown" href="#" title="Editar visiblididad"><i class="fas fa-caret-down"></i></a></span>
     </div>
+    {% else %}
+    <div class="col">
+        {{ product.description }}
+    </div>
+    {% endif %}
+
 </div>

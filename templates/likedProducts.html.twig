@@ -1,0 +1,7 @@
+<div class="container">
+    {% for product in user.likedProducts %}
+        <div class="product-block">
+            {% include 'productBlock.html.twig'%}
+        </div>
+    {% endfor %}
+</div>
