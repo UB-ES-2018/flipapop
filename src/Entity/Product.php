@@ -190,6 +190,7 @@ class Product
     public function setVisibility(int $visibility): self
     {
         $this->visibility = $visibility;
+        return $this;
     }
   
     public function isLikedBy(User $user){
