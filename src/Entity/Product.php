@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use function is_null;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Vich\UploaderBundle\Entity\File as EmbeddedFile;
@@ -68,13 +69,27 @@ class Product
     private $updatedAt;
 
     /**
+     *
+     * NOTE: The value will be between 1 and 3.
+     *
+     * @ORM\Column(type="integer")
+     */
+    private $visibility;
+
+    const VISIBLE_ALL = 1;
+    const VISIBLE_LOGGED = 2;
+    const VISIBLE_ME = 3;
+
+    /**
      * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="likedProducts")
      */
     private $likedUsers;
 
+
     public function __construct()
     {
         $this->image = new EmbeddedFile();
+        $this->visibility = $this::VISIBLE_ALL;
         $this->likedUsers = new ArrayCollection();
     }
 
@@ -166,6 +181,17 @@ class Product
         return $this;
     }
 
+
+    public function getVisibility(): ?int
+    {
+        return $this->visibility;
+    }
+
+    public function setVisibility(int $visibility): self
+    {
+        $this->visibility = $visibility;
+    }
+  
     public function isLikedBy(User $user){
         foreach ($this->likedUsers as $u){
             if($u->getId() === $user->getId()){
@@ -193,6 +219,24 @@ class Product
         return $this;
     }
 
+
+    /**
+     * Return true IF:
+     * 1. visibility = VISIBLE_ALL OR
+     * 2. visibility = VISIBLE_LOGGED AND user is logged in OR
+     * 3. I am the user.
+     *
+     * @param User|null $user
+     * @return bool|null
+     */
+    public function canView(?User $user): ?bool
+    {
+        if($this->getVisibility() === self::VISIBLE_ALL) return true;
+        if($this->getVisibility() === self::VISIBLE_LOGGED and !is_null($user)) return true;
+        if($this->getVisibility() === self::VISIBLE_ME and !is_null($user) and $user->getId() === $this->usuario->getId())return true;
+        return false;
+    }
+  
     public function removeLikedUser(User $likedUser): self
     {
         if ($this->likedUsers->contains($likedUser)) {
@@ -201,5 +245,6 @@ class Product
         }
 
         return $this;
+
     }
 }

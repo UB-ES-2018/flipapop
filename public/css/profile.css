@@ -81,7 +81,8 @@
     margin-bottom: 20px;
     width: 1100px;
     min-height: 100px;
-    padding-top: 20px;
+    padding-top: 5px;
+    padding-left: 5px;
 }
 
 .new-product-block{
@@ -110,6 +111,25 @@
     padding-top: 17px;
     padding-left: 17px;
 }
+.image-block {
+    background-color: grey;
+    border-radius: 10px;
+    width: 85px;
+    height: 85px;
+    overflow: hidden;
+    border: 1px solid;
+    border-color: #0e9486;
+
+}
+
+.image-block-image{
+
+    object-fit: contain;
+    max-height:100%;
+}
+
+
+
 
 .plus-circle{
     height: 50px;
@@ -179,4 +199,8 @@
 
 .profile-header{
     padding-bottom: 10px;
+}
+
+#visibilityMenu a{
+    text-decoration: none;
 }
