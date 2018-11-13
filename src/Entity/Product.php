@@ -197,7 +197,7 @@ class Product
     {
         if($this->getVisibility() === self::VISIBLE_ALL) return true;
         if($this->getVisibility() === self::VISIBLE_LOGGED and !is_null($user)) return true;
-        if($this->getVisibility() === self::VISIBLE_ME and $user->getId() === $this->usuario->getId())return true;
+        if($this->getVisibility() === self::VISIBLE_ME and !is_null($user) and $user->getId() === $this->usuario->getId())return true;
         return false;
     }
 }

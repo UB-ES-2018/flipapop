@@ -9,7 +9,9 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 
 class AjaxController extends AbstractController
 {
@@ -18,10 +20,15 @@ class AjaxController extends AbstractController
      */
     public function cambiarVisibilidadProducto(Request $request){
 
-        $productID = $request->get('Product');
-        $visibility = $request->get('Visibility');
+        $productID = $request->request->all()['id'];
+        $visibility = $request->request->all()['visibility'];
         $Product = $this->getDoctrine()->getManager()->getRepository('App:Product')->find($productID);
         $Product->setVisibility($visibility);
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($Product);
+        $em->flush();
+
+        return new JsonResponse(['visibility' => $visibility],200);
     }
 
 }
