@@ -65,9 +65,22 @@ class Product
      */
     private $updatedAt;
 
+    /**
+     * NOTE: The value will be between 1 and 3.
+     *
+     * @ORM\Column(type="integer")
+     */
+    private $visibility;
+
+    const VISIBLE_ALL = 1;
+    const VISIBLE_LOGGED = 2;
+    const VISIBLE_ME = 3;
+
+
     public function __construct()
     {
         $this->image = new EmbeddedFile();
+        $this->visibility = $this::VISIBLE_ALL;
     }
 
     /**
@@ -156,5 +169,35 @@ class Product
         $this->usuario = $usuario;
 
         return $this;
+    }
+
+    public function getVisibility(): ?int
+    {
+        return $this->visibility;
+    }
+
+    public function setVisibility(int $visibility): self
+    {
+        $this->visibility = $visibility;
+
+        return $this;
+    }
+
+    /**
+     * Return true IF:
+     * 1. visibility = VISIBLE_ALL OR
+     * 2. visibility = VISIBLE_LOGGED AND user is logged in OR
+     * 3. I am the user.
+     *
+     * @param User|null $user
+     * @return bool|null
+     */
+    public function canView(?User $user): ?bool
+    {
+        if($this->visibility = $this::VISIBLE_ALL OR
+            ($this->visibility = $this::VISIBLE_LOGGED AND $this->getUser()) OR
+                $this->getUser() === $user)
+            return true;
+        return false;
     }
 }
