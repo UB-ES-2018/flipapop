@@ -298,7 +298,6 @@ class User implements UserInterface, Serializable
     public function addLikedProduct(Product $likedProduct): self
     {
         if (!$this->likedProducts->contains($likedProduct)) {
-            $likedProduct->addLikedUser($this);
             $this->likedProducts->add($likedProduct);
         }
 
