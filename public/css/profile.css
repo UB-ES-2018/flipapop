@@ -204,3 +204,7 @@
 #visibilityMenu a{
     text-decoration: none;
 }
+
+.active .dot-image {
+    background-color: #13c1ac;
+}
