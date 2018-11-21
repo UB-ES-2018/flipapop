@@ -9,9 +9,15 @@
         <div class="name-holder">
            {{ product.name }}
         </div>
-        <div class="description-holder">
-            {{ product.description }}
+
+        <div align="center">
+            {% if app.user is not null and product.getSold() %}
+                <h3>Sold</h3>
+            {% else %}
+                <h3>Available</h3>
+            {% endif %}
         </div>
+
         <div class="like-holder" align="right">
             <span class="n-likes">
                 {{ product.likedUsers | length }}

@@ -112,4 +112,31 @@
             }
         }
     </script>
+
+    <script type="text/javascript">
+
+        $('.fa-handshake').click(function (event) {
+            event.preventDefault();
+            var id = $(this).data('id');
+            var handshake = $(this);
+            $.ajax({
+                type: "POST",
+                url: '{{ path('ajax_sell_product') }}',
+                data: {id: id},
+                dataType: "json"
+            }).done(function (data) {
+                if(data.sold){
+                    console.log("llega");
+                    handshake.removeClass('far');
+                    handshake.addClass('fas sold');
+                }else{
+                    console.log("llega2");
+                    handshake.removeClass('fas');
+                    handshake.removeClass('sold');
+                    handshake.addClass('far');
+                }
+
+            });
+        });
+    </script>
 {% endblock %}
