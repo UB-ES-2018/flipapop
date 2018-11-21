@@ -11,6 +11,7 @@ namespace App\Controller;
 
 use App\Entity\Product;
 use App\Form\Type\ProductType;
+use Exception;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -46,6 +47,34 @@ class ProductController extends AbstractController
                 'user' => $this->getUser(),
                 'tab' => 'new'
             ));
+    }
+
+    /**
+     *
+     *
+     * @Route("/product/{idProduct}", name="view_product")
+     */
+
+    public function viewProduct(Request $request, $idProduct){
+
+        if (is_null($idProduct)){
+            //Nueva excepcion bonita
+            return  new Exception();
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $product = $em->getRepository(Product::class )-> find($idProduct);
+
+        if(is_null($product)){
+            return new Exception();
+        }
+
+        if (!$product->canView($this->getUser())){
+            return new Exception();
+        }
+
+        return $this->render('viewProduct.html.twig', ['product' => $product]);
+
     }
 
 }
