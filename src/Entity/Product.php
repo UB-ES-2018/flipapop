@@ -85,12 +85,21 @@ class Product
      */
     private $likedUsers;
 
+    /**
+     *
+     * NOTE: The product is sold or not.
+     *
+     * @ORM\Column(type="boolean")
+     */
+    private $sold;
+
 
     public function __construct()
     {
         $this->image = new EmbeddedFile();
         $this->visibility = $this::VISIBLE_ALL;
         $this->likedUsers = new ArrayCollection();
+        $this->sold = false;
     }
 
     /**
@@ -190,6 +199,24 @@ class Product
     public function setVisibility(int $visibility): self
     {
         $this->visibility = $visibility;
+        return $this;
+    }
+
+
+    public function getSold()
+    {
+        return $this->sold;
+    }
+
+    public function setSold($sold): self
+    {
+        $this->sold = $sold;
+        return $this;
+    }
+
+    public function changeSold(): self
+    {
+        $this->sold = !$this->sold;
         return $this;
     }
   

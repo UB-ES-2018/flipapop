@@ -53,4 +53,21 @@ class AjaxController extends AbstractController
         return $this->redirectToRoute('landing_page');
     }
 
+    /**
+     *
+     * @Route("/sell/product", name="ajax_sell_product", options={"expose"=true})
+     */
+    public function sellProduct(Request $request){
+        $em = $this->getDoctrine()->getManager();
+        
+        $id = $request->request->get('id');
+        $product = $em->getRepository(Product::class)->find($id);
+        $product->changeSold();
+        $em->persist($product);
+        $em->flush();
+
+        return new JsonResponse(['sold' => $product->getSold()], 200);
+
+    }
+
 }
