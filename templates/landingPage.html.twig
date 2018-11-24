@@ -15,7 +15,7 @@
 
 {% block javascripts %}
 <script type="text/javascript">
-
+    {% if app.user is not null %}
     $('.fa-heart').click(function (event) {
         event.preventDefault();
         var id = $(this).data('id');
@@ -39,7 +39,7 @@
             heart.parent().find(".n-likes").html(data.nlikes)
         });
     });
-
+    {% endif %}
 
 </script>
 {% endblock %}
