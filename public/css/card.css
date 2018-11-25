@@ -10,6 +10,69 @@
 
 }
 
+.view-product {
+    border-right: 30px;
+    margin-right: 100px;
+    margin-left: 700px;
+
+    transition: 0.3s;
+    padding-left:3px;
+    padding-right:3px;
+    padding-top:3px;
+    height: 620px;
+    width: 420px;
+    border-radius: 10px;
+    box-shadow: 0 0 2px 0 rgba(0,0,0,.1);
+
+}
+
+.name-surname-holder-big{
+    padding-top: 10px;
+    font-family: sans-serif;
+    font-weight: lighter;
+    font-size: x-large;
+
+}
+
+.price-holder-big{
+    padding-top: 10px;
+    font-weight: bold;
+    font-size: xx-large;
+}
+.name-holder-big{
+    padding-top: 10px;
+    font-family: sans-serif;
+    font-weight: lighter;
+    font-size: x-large;
+
+}
+
+
+.description-holder-big{
+    font-family: sans-serif;
+    font-weight: lighter;
+    height: 90px;
+    color: #4f6b71;
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-top: 5px;
+    font-size: x-large;
+
+}
+
+.image-holder-big {
+    border-radius: 5px 5px 5px 5px;
+    width: 412px;
+    height: 335px;
+    max-width: 412px;
+    max-height: 340px;
+    background-color: #969896;
+    overflow: hidden;
+
+}
+
+
 .cardholder {
     border-right: 30px;
     margin-right: 15px;
@@ -77,4 +140,17 @@
 
 .liked{
     color: red;
+}
+
+.dot-image {
+    height: 35px;
+    width: 35px;
+    background-color: #a3a3a3;
+    border-radius: 50%;
+    display: block;
+    isplay: inline-block;
+    overflow: hidden;
+    border: 1px solid;
+    border-color: #fff;
+
 }

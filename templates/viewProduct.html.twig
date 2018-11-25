@@ -1,0 +1,97 @@
+{% extends 'base/base.html.twig' %}
+
+{% block body %}
+
+    <div class="view-product" align="left">
+
+        <table style="width:100%">
+
+            <td style="width:25%">
+                <div class="dot-image">
+                {%  if product.usuario.image is not null%}
+                    <img id="side-bar-profile-image" src="{{ vich_uploader_asset(product.usuario, 'imageFile') }}">
+                {% endif %}
+                </div>
+            </td>
+
+
+            <td style="width:60%">
+                <span class="name-surname-holder-big">
+                {{ product.usuario.name }}
+                {{ product.usuario.surname }}
+                </span>
+                <div>{{ product.usuario.products.count() }} {{ "products" }}</div>
+
+            </td>
+
+            <td style="width:15%">
+                <div class="like-holder" >
+                    <span class="n-likes">
+                        {{ product.likedUsers | length }}
+                    </span>
+                    {% if app.user is not null and product.isLikedBy(app.user) %}
+                        <i data-id="{{ product.id }}" class="fas fa-heart liked"></i>
+                    {% else %}
+                        <i data-id="{{ product.id }}" class="far fa-heart"></i>
+                    {% endif %}
+                </div>
+            </td>
+
+        </table>
+
+
+
+
+        <div class="image-holder-big">
+            {%  if product.image is not null%}
+                <img id="side-bar-profile-image" src="{{ vich_uploader_asset(product, 'imageFile') }}" width="100%">
+            {% endif %}
+        </div>
+
+        <div class="card-bottom">
+            <div class="price-holder-big"> {{product.price}}€</div>
+            <div class="name-holder-big">
+                {{ product.name }}
+            </div>
+            <div class="description-holder-big">
+                {{ product.description }}
+            </div>
+        </div>
+
+    </div>
+
+
+
+{% endblock %}
+
+
+{% block javascripts %}
+    <script type="text/javascript">
+
+        $('.fa-heart').click(function (event) {
+            event.preventDefault();
+            var id = $(this).data('id');
+            var heart = $(this);
+            $.ajax({
+                type: "POST",
+                url: '{{ path('ajax_like_product') }}',
+                data: {id: id},
+                dataType: "json"
+            }).done(function (data) {
+                if(data.liked){
+                    console.log("llega");
+                    heart.removeClass('far');
+                    heart.addClass('fas liked');
+                }else{
+                    console.log("llega2");
+                    heart.removeClass('fas');
+                    heart.removeClass('liked');
+                    heart.addClass('far');
+                }
+                heart.parent().find(".n-likes").html(data.nlikes)
+            });
+        });
+
+
+    </script>
+{% endblock %}
