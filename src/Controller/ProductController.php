@@ -11,8 +11,10 @@ namespace App\Controller;
 
 use App\Entity\Product;
 use App\Form\Type\ProductType;
+use function is_null;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -46,6 +48,48 @@ class ProductController extends AbstractController
                 'user' => $this->getUser(),
                 'tab' => 'new'
             ));
+    }
+
+    /**
+     * @param Request $request
+     * @param $idProducto
+     * @Route("/product/{idProducto}", name="view_product")
+     */
+    public function viewProduct(Request $request, $idProducto){
+        if(is_null($idProducto)){
+            // TODO: Excepciones bonitas
+            return new Exception();
+        }
+        $em = $this->getDoctrine()->getManager();
+        $producto = $em->getRepository(Product::class)->find($idProducto);
+
+        if(is_null($producto)){
+            // TODO: Excepciones bonitas
+            return new Exception();
+        }
+
+        $comentarios = $em->getRepository('App:ComentarioProducto')->findBy(['product' => $producto], ["fechaCreacion" => "ASC"]);
+        $comentarios = $this->orderCommentsForView($comentarios);
+        return $this->render('viewProduct.html.twig', array(
+            'comentarios' => $comentarios,
+            'product' => $producto
+        ));
+
+    }
+
+
+    private function orderCommentsForView($comentarios){
+        $result = [];
+        foreach($comentarios as $comentario){
+            if(is_null($comentario->getPadre())){
+                $result[$comentario->getId()] = ["comment" => $comentario, "sons" => []];
+            }else{
+                $result[$comentario->getPadre()]["sons"][]= $comentario;
+            }
+
+        }
+
+        return $result;
     }
 
 }

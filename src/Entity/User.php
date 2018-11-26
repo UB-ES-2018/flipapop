@@ -92,6 +92,11 @@ class User implements UserInterface, Serializable
     private $likedProducts;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ComentarioProducto", mappedBy="usuario", orphanRemoval=true)
+     */
+    private $comentarioProductos;
+
+    /**
      * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
      * of 'UploadedFile' is injected into this setter to trigger the  update. If this
      * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
@@ -131,6 +136,7 @@ class User implements UserInterface, Serializable
         $this->products = new ArrayCollection();
         $this->image = new EmbeddedFile();
         $this->likedProducts = new ArrayCollection();
+        $this->comentarioProductos = new ArrayCollection();
     }
 
 
@@ -314,5 +320,39 @@ class User implements UserInterface, Serializable
         return $this;
     }
 
+    /**
+     * @return Collection|ComentarioProducto[]
+     */
+    public function getComentarioProductos(): Collection
+    {
+        return $this->comentarioProductos;
+    }
+
+    public function addComentarioProducto(ComentarioProducto $comentarioProducto): self
+    {
+        if (!$this->comentarioProductos->contains($comentarioProducto)) {
+            $this->comentarioProductos[] = $comentarioProducto;
+            $comentarioProducto->setUsuario($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComentarioProducto(ComentarioProducto $comentarioProducto): self
+    {
+        if ($this->comentarioProductos->contains($comentarioProducto)) {
+            $this->comentarioProductos->removeElement($comentarioProducto);
+            // set the owning side to null (unless already changed)
+            if ($comentarioProducto->getUsuario() === $this) {
+                $comentarioProducto->setUsuario(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getFullUserName(){
+        return $this->name." ".$this->surname;
+    }
 
 }

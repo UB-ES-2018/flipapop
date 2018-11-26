@@ -18,8 +18,10 @@
             </span>
             {% if app.user is not null and product.isLikedBy(app.user) %}
                 <i data-id="{{ product.id }}" class="fas fa-heart liked"></i>
-            {% else %}
+            {% elseif app.user is not null %}
                 <i data-id="{{ product.id }}" class="far fa-heart"></i>
+            {% else %}
+                <i data-id="{{ product.id }}" class="fas fa-heart liked"></i>
             {% endif %}
         </div>
     </div>
