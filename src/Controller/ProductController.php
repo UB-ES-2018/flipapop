@@ -11,7 +11,6 @@ namespace App\Controller;
 
 use App\Entity\Product;
 use App\Form\Type\ProductType;
-use function is_null;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Config\Definition\Exception\Exception;

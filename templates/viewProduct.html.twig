@@ -3,11 +3,62 @@
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('css/profile.css') }}" >
 {% endblock %}
-
 {% block body %}
+    <div class="row centered">
+        <div class="col-sm col-lg-6  view-product">
+            <table style="width:100%">
+                <td style="width:25%">
+                    <div class="dot-image">
+                        {%  if product.usuario.image is not null%}
+                            <img id="side-bar-profile-image" src="{{ vich_uploader_asset(product.usuario, 'imageFile') }}">
+                        {% endif %}
+                    </div>
+                </td>
+
+
+                <td style="width:60%">
+                <span class="name-surname-holder-big">
+                {{ product.usuario.name }}
+                    {{ product.usuario.surname }}
+                </span>
+                    <div>{{ product.usuario.products.count() }} {{ "products" }}</div>
+
+                </td>
+
+                <td style="width:15%">
+                    <div class="like-holder" >
+                    <span class="n-likes" style="font-size: 30px; font-weight: 200">
+                        {{ product.likedUsers | length }}
+                    </span>
+                        {% if app.user is not null and product.isLikedBy(app.user) %}
+                            <i data-id="{{ product.id }}" class="fas fa-heart fa-2x liked"></i>
+                        {% else %}
+                            <i data-id="{{ product.id }}" class="far fa-heart fa-2x"></i>
+                        {% endif %}
+                    </div>
+                </td>
+
+            </table>
+            <div class="image-holder-big">
+                {%  if product.image is not null%}
+                    <img id="side-bar-profile-image" src="{{ vich_uploader_asset(product, 'imageFile') }}">
+                {% endif %}
+            </div>
+            <div class="card-bottom">
+                <div class="price-holder-big"> {{product.price}}€</div>
+                <div class="name-holder-big">
+                    {{ product.name }}
+                </div>
+                <div class="description-holder-big">
+                    {{ product.description }}
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row centered">
         {% include 'commentsBlock.html.twig' %}
     </div>
+
 {% endblock %}
 
 {% block javascripts %}
@@ -196,5 +247,27 @@
             parentReplyBlock.parent().parent().children('.col-10').children('.comment-reply-button').children('span').html(n+1);
 
         }
+        
+        $('.fa-heart').click(function (event) {
+            event.preventDefault();
+            var id = $(this).data('id');
+            var heart = $(this);
+            $.ajax({
+                type: "POST",
+                url: '{{ path('ajax_like_product') }}',
+                data: {id: id},
+                dataType: "json"
+            }).done(function (data) {
+                if(data.liked){
+                    heart.removeClass('far');
+                    heart.addClass('fas liked');
+                }else{
+                    heart.removeClass('fas');
+                    heart.removeClass('liked');
+                    heart.addClass('far');
+                }
+                heart.parent().find(".n-likes").html(data.nlikes)
+            });
+        });
     </script>
 {% endblock %}

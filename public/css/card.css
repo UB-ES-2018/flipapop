@@ -7,13 +7,75 @@
     width: 220px;
     border-radius: 10px;
     box-shadow: 0 0 2px 0 rgba(0,0,0,.1);
+    text-decoration: none;
+
 
 }
+
+.view-product {
+    margin-left: 32px;
+    margin-right: 32px;
+    transition: 0.3s;
+    padding-left:16px;
+    padding-right:16px;
+    padding-top:3px;
+    border-radius: 10px;
+    box-shadow: 0 0 2px 0 rgba(0,0,0,.1);
+    background-color: white;
+
+}
+
+.name-surname-holder-big{
+    padding-top: 10px;
+    font-family: sans-serif;
+    font-weight: lighter;
+    font-size: x-large;
+
+}
+
+.price-holder-big{
+    padding-top: 10px;
+    font-weight: bold;
+    font-size: xx-large;
+}
+.name-holder-big{
+    padding-top: 10px;
+    font-family: sans-serif;
+    font-weight: lighter;
+    font-size: x-large;
+
+}
+
+
+.description-holder-big{
+    font-family: sans-serif;
+    font-weight: lighter;
+    height: 90px;
+    color: #4f6b71;
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-top: 5px;
+    font-size: x-large;
+
+}
+
+.image-holder-big {
+    border-radius: 5px 5px 5px 5px;
+    background-color: #969896;
+    min-height: 500px;
+    overflow: hidden;
+
+}
+
 
 .cardholder {
     border-right: 30px;
     margin-right: 15px;
     margin-left: 15px;
+    margin-bottom: 15px;
+    text-decoration: none;
+
 }
 
 
@@ -21,12 +83,16 @@
     padding-top: 10px;
     font-weight: bold;
     font-size: x-large;
+    text-decoration: none;
+
 }
 .name-holder{
     padding-top: 10px;
     font-family: sans-serif;
     font-weight: lighter;
     font-size: larger;
+    text-decoration: none;
+
 
 }
 
@@ -40,6 +106,8 @@
     overflow: hidden;
     text-overflow: ellipsis;
     padding-top: 5px;
+    text-decoration: none;
+
 
 }
 
@@ -77,4 +145,20 @@
 
 .liked{
     color: red;
+}
+
+.dot-image {
+    height: 35px;
+    width: 35px;
+    background-color: #a3a3a3;
+    border-radius: 50%;
+    display: inline-block;
+    overflow: hidden;
+    border: 1px solid;
+    border-color: #fff;
+
+}
+
+.no-decoration{
+    text-decoration: none;
 }

@@ -1,18 +1,19 @@
-<div class="card">
-    <div class="image-holder">
-        {%  if product.image is not null%}
-            <img id="side-bar-profile-image" src="{{ vich_uploader_asset(product, 'imageFile') }}">
-        {% endif %}
-    </div>
-    <div class="card-bottom">
-        <div class="price-holder"> {{product.price}}€</div>
-        <div class="name-holder">
-           {{ product.name }}
+<a class="no-decoration" style="text-decoration: none; color: black" href="{{ path('view_product', {'idProduct': product.id}) }}">
+    <div class="card">
+        <div class="image-holder">
+            {%  if product.image is not null%}
+                <img id="side-bar-profile-image" src="{{ vich_uploader_asset(product, 'imageFile') }}" height="100%">
+            {% endif %}
         </div>
-        <div class="description-holder">
-            {{ product.description }}
-        </div>
-        <div class="like-holder" align="right">
+        <div class="card-bottom">
+            <div class="price-holder"> {{product.price}}€</div>
+            <div class="name-holder">
+                {{ product.name }}
+            </div>
+            <div class="description-holder">
+                {{ product.description }}
+            </div>
+            <div class="like-holder" align="right">
             <span class="n-likes">
                 {{ product.likedUsers | length }}
             </span>
@@ -25,4 +26,4 @@
             {% endif %}
         </div>
     </div>
-</div>
+</a>
