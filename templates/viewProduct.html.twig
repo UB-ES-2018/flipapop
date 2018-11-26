@@ -24,7 +24,11 @@
                     <div>{{ product.usuario.products.count() }} {{ "products" }}</div>
 
                 </td>
-
+                {% if product.sold %}
+                <td style="width: 15%">
+                    <i data-id="{{ product.id }}" title="SOLD!" style="color: #0e9486" class="fas fa-handshake fa-2x"></i>
+                </td>
+                {% endif %}
                 <td style="width:15%">
                     <div class="like-holder" >
                     <span class="n-likes" style="font-size: 30px; font-weight: 200">

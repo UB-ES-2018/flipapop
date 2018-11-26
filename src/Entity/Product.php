@@ -90,6 +90,14 @@ class Product
      */
     private $comentarios;
 
+    /**
+     *
+     * NOTE: The product is sold or not.
+     *
+     * @ORM\Column(type="boolean")
+     */
+    private $sold;
+
 
     public function __construct()
     {
@@ -97,6 +105,7 @@ class Product
         $this->visibility = $this::VISIBLE_ALL;
         $this->likedUsers = new ArrayCollection();
         $this->comentarios = new ArrayCollection();
+        $this->sold = false;
     }
 
     /**
@@ -198,7 +207,25 @@ class Product
         $this->visibility = $visibility;
         return $this;
     }
-  
+
+
+    public function getSold()
+    {
+        return $this->sold;
+    }
+
+    public function setSold($sold): self
+    {
+        $this->sold = $sold;
+        return $this;
+    }
+
+    public function changeSold(): self
+    {
+        $this->sold = !$this->sold;
+        return $this;
+    }
+
     public function isLikedBy(User $user){
         foreach ($this->likedUsers as $u){
             if($u->getId() === $user->getId()){
