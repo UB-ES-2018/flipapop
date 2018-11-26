@@ -11,9 +11,9 @@ namespace App\Controller;
 
 use App\Entity\Product;
 use App\Form\Type\ProductType;
-use Exception;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -50,31 +50,45 @@ class ProductController extends AbstractController
     }
 
     /**
-     *
-     *
-     * @Route("/product/{idProduct}", name="view_product")
+     * @param Request $request
+     * @param $idProducto
+     * @Route("/product/{idProducto}", name="view_product")
      */
-
-    public function viewProduct(Request $request, $idProduct){
-
-        if (is_null($idProduct)){
-            //Nueva excepcion bonita
-            return  new Exception();
+    public function viewProduct(Request $request, $idProducto){
+        if(is_null($idProducto)){
+            // TODO: Excepciones bonitas
+            return new Exception();
         }
-
         $em = $this->getDoctrine()->getManager();
-        $product = $em->getRepository(Product::class )-> find($idProduct);
+        $producto = $em->getRepository(Product::class)->find($idProducto);
 
-        if(is_null($product)){
+        if(is_null($producto)){
+            // TODO: Excepciones bonitas
             return new Exception();
         }
 
-        if (!$product->canView($this->getUser())){
-            return new Exception();
+        $comentarios = $em->getRepository('App:ComentarioProducto')->findBy(['product' => $producto], ["fechaCreacion" => "ASC"]);
+        $comentarios = $this->orderCommentsForView($comentarios);
+        return $this->render('viewProduct.html.twig', array(
+            'comentarios' => $comentarios,
+            'product' => $producto
+        ));
+
+    }
+
+
+    private function orderCommentsForView($comentarios){
+        $result = [];
+        foreach($comentarios as $comentario){
+            if(is_null($comentario->getPadre())){
+                $result[$comentario->getId()] = ["comment" => $comentario, "sons" => []];
+            }else{
+                $result[$comentario->getPadre()]["sons"][]= $comentario;
+            }
+
         }
 
-        return $this->render('viewProduct.html.twig', ['product' => $product]);
-
+        return $result;
     }
 
 }

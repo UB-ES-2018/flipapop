@@ -85,12 +85,18 @@ class Product
      */
     private $likedUsers;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ComentarioProducto", mappedBy="product", orphanRemoval=true)
+     */
+    private $comentarios;
+
 
     public function __construct()
     {
         $this->image = new EmbeddedFile();
         $this->visibility = $this::VISIBLE_ALL;
         $this->likedUsers = new ArrayCollection();
+        $this->comentarios = new ArrayCollection();
     }
 
     /**
@@ -247,5 +253,36 @@ class Product
 
         return $this;
 
+    }
+
+    /**
+     * @return Collection|ComentarioProducto[]
+     */
+    public function getComentarios(): Collection
+    {
+        return $this->comentarios;
+    }
+
+    public function addComentario(ComentarioProducto $comentario): self
+    {
+        if (!$this->comentarios->contains($comentario)) {
+            $this->comentarios[] = $comentario;
+            $comentario->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComentario(ComentarioProducto $comentario): self
+    {
+        if ($this->comentarios->contains($comentario)) {
+            $this->comentarios->removeElement($comentario);
+            // set the owning side to null (unless already changed)
+            if ($comentario->getProduct() === $this) {
+                $comentario->setProduct(null);
+            }
+        }
+
+        return $this;
     }
 }
