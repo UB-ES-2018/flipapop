@@ -91,6 +91,14 @@ class Product
     private $numLikes;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ComentarioProducto", mappedBy="product", orphanRemoval=true)
+     */
+    private $comentarios;
+
+    /**
+     *
+     * NOTE: The product is sold or not.
+     *
      * @ORM\Column(type="boolean")
      */
     private $sold;
@@ -102,6 +110,7 @@ class Product
         $this->visibility = $this::VISIBLE_ALL;
         $this->likedUsers = new ArrayCollection();
         $this->numLikes = 0;
+        $this->comentarios = new ArrayCollection();
         $this->sold = false;
     }
 
@@ -204,7 +213,25 @@ class Product
         $this->visibility = $visibility;
         return $this;
     }
-  
+
+
+    public function getSold()
+    {
+        return $this->sold;
+    }
+
+    public function setSold($sold): self
+    {
+        $this->sold = $sold;
+        return $this;
+    }
+
+    public function changeSold(): self
+    {
+        $this->sold = !$this->sold;
+        return $this;
+    }
+
     public function isLikedBy(User $user){
         foreach ($this->likedUsers as $u){
             if($u->getId() === $user->getId()){
@@ -271,9 +298,26 @@ class Product
     public function setNumLikes(int $numLikes): self
     {
         $this->numLikes = $numLikes;
+    }
+  
+    /**
+     * @return Collection|ComentarioProducto[]
+     */
+    public function getComentarios(): Collection
+    {
+        return $this->comentarios;
+    }
+
+    public function addComentario(ComentarioProducto $comentario): self
+    {
+        if (!$this->comentarios->contains($comentario)) {
+            $this->comentarios[] = $comentario;
+            $comentario->setProduct($this);
+        }
 
         return $this;
     }
+
 
     public function getSold(): ?bool
     {
@@ -283,6 +327,17 @@ class Product
     public function setSold(bool $sold): self
     {
         $this->sold = $sold;
+    }
+  
+    public function removeComentario(ComentarioProducto $comentario): self
+    {
+        if ($this->comentarios->contains($comentario)) {
+            $this->comentarios->removeElement($comentario);
+            // set the owning side to null (unless already changed)
+            if ($comentario->getProduct() === $this) {
+                $comentario->setProduct(null);
+            }
+        }
 
         return $this;
     }

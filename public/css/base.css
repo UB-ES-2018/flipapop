@@ -50,3 +50,171 @@
 .vich-image{
     max-width: 250px;
 }
+
+#newComment{
+    position: absolute;
+    right: 40px;
+}
+
+
+.comments-block{
+    background-color: #fff;
+    border-radius: 10px;
+    border: 1px solid #eceff1;
+    padding-left: 32px;
+    padding-right: 32px;
+}
+
+.comments-block textarea{
+    width: 100%;
+    resize: none;
+}
+
+.comment-user-image{
+    height: 40px;
+    width: 40px;
+}
+
+.comment-date{
+    font-size: 0.8rem;
+    font-weight: lighter;
+    position:absolute;
+    right: 40px;
+}
+
+.reply-date{
+    font-size: 0.8rem;
+    font-weight: lighter;
+    position:absolute;
+    right: 50px;
+}
+
+.comment-reply-button{
+    font-weight: 700;
+    position: absolute;
+    color: #196157;
+    right: -30px;
+}
+
+.comment-reply-button i{
+    font-size: 0.7rem;
+}
+
+.comment-reply-button span{
+    font-size: 0.8rem;
+    margin-left: 4px;
+}
+
+.reply-block{
+    display: none;
+    width: 100%;
+}
+
+
+
+.reply-textarea{
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    background-color: #fdfffd;
+    align-content: center;
+    border-radius: 30px;
+    box-shadow: inset 0px 0px 1px 1px rgba(0,0,0,0.75);
+    width: 100%;
+    margin-top: 20px;
+    padding-bottom: 8px;
+
+}
+
+.reply-textarea textarea{
+    all: revert;
+    resize: none;
+    width: 95%;
+    -moz-appearance:none;
+    outline:0px none transparent;
+    background-color: transparent;
+    border: none;
+    align-self: flex-end;
+    margin: 0 auto;
+    min-height: 30px;
+    height: 30px;
+}
+
+.reply-textarea:focus{
+    outline: 0;
+
+}
+
+.comment-reply-button a:hover{
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.parent-comment{
+    padding: 8px 8px;
+    border-top: 1px solid #196157;
+    min-height: 80px;
+    margin-top: 20px;
+
+}
+.son-comment{
+    background-color: #effdff;
+    padding-left: 32px;
+
+
+}
+
+.reply-block{
+    margin-top: 16px;
+}
+
+.comment-empty-user-image{
+    margin-top: 2px;
+    margin-left: 5px;
+    font-size: 32px;
+}
+.comment-text{
+    overflow-wrap: break-word;
+    width: 100%;
+}
+
+.comment-user-name{
+    font-size: 0.9rem;
+    font-weight: bolder;
+}
+
+.comment-dot-image {
+    height: 40px;
+    width: 40px;
+    background-color: #a3a3a3;
+    border-radius: 50%;
+    display: inline-block;
+    overflow: hidden;
+    border: 1px solid;
+    border-color: #fff;
+}
+
+.reply-empty-user-image{
+    margin-top: 2px;
+    margin-left: 2px;
+    font-size: 25px;
+}
+
+.reply-dot-image {
+    height: 30px;
+    width: 30px;
+    background-color: #a3a3a3;
+    border-radius: 50%;
+    display: inline-block;
+    overflow: hidden;
+    border: 1px solid;
+    border-color: #fff;
+    margin-left: 5px;
+    margin-top: 5px;
+    margin-right: 5px;
+}
+
+.reply-user-image{
+    height: 30px;
+    width: 30px;
+}

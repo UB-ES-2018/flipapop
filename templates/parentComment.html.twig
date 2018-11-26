@@ -1,0 +1,73 @@
+
+
+<div class="row parent-comment" data-id="{{ parentComment.comment.id }}">
+
+    <div class="col-1" style="margin-right: 8px">
+        <div class="comment-dot-image">
+            {%  if parentComment.comment.usuario.image.name is not null %}
+                <img class="comment-user-image" src="{{ vich_uploader_asset(parentComment.comment.usuario, 'imageFile') }}">
+            {% else %}
+                <i class="fas fa-user comment-empty-user-image" style="color: white"></i>
+            {% endif %}
+        </div>
+    </div>
+    <div class="col-10" style="padding-left: 30px">
+        <div class="row comment-user-name">
+            {{ parentComment.comment.usuario.getFullUserName }}
+        </div>
+        <div class="row comment-text">
+            <div class="col">
+                {{ parentComment.comment.texto }}
+            </div>
+        </div>
+        <div class="comment-reply-button">
+            <a>Reply</a>
+            <i class="fas fa-comment-alt"></i><span>{{ parentComment.sons | length}}</span>
+        </div>
+    </div>
+    <div class="row comment-date">
+        {{ parentComment.comment.fechaCreacion | date('Y-m-d H:i') }}
+    </div>
+    <div class="reply-block">
+        {% for son in parentComment.sons %}
+            <div class="row son-comment" data-id="{{ son.id }}">
+                <div class="col-1" style="margin-right: 8px">
+                    <div class="reply-dot-image">
+                        {%  if son.usuario is not null %}
+                            <img class="reply-user-image" src="{{ vich_uploader_asset(son.usuario, 'imageFile') }}">
+                        {% else %}
+                            <i class="fas fa-user reply-empty-user-image" style="color: white"></i>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="col-10" style="padding-left: 30px">
+                    <div class="row comment-user-name">
+                        {{ son.usuario.getFullUserName }}
+                    </div>
+                    <div class="row comment-text">
+                        <div class="col">
+                            {{ son.texto }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row reply-date">
+                    {{ son.fechaCreacion | date('Y-m-d H:i') }}
+                </div>
+            </div>
+        {% endfor %}
+        <div class="reply-textarea">
+            <div class="reply-dot-image">
+                {%  if app.user.image is not null %}
+                    <img class="reply-user-image" src="{{ vich_uploader_asset(app.user, 'imageFile') }}">
+                {% else %}
+                    <i class="fas fa-user reply-empty-user-image" style="color: white"></i>
+                {% endif %}
+            </div>
+            <textarea class="reply" placeholder="Write a reply..."></textarea>
+
+        </div>
+
+    </div>
+
+</div>
+
