@@ -7,22 +7,21 @@
     width: 220px;
     border-radius: 10px;
     box-shadow: 0 0 2px 0 rgba(0,0,0,.1);
+    text-decoration: none;
+
 
 }
 
 .view-product {
-    border-right: 30px;
-    margin-right: 100px;
-    margin-left: 700px;
-
+    margin-left: 32px;
+    margin-right: 32px;
     transition: 0.3s;
-    padding-left:3px;
-    padding-right:3px;
+    padding-left:16px;
+    padding-right:16px;
     padding-top:3px;
-    height: 620px;
-    width: 420px;
     border-radius: 10px;
     box-shadow: 0 0 2px 0 rgba(0,0,0,.1);
+    background-color: white;
 
 }
 
@@ -63,11 +62,8 @@
 
 .image-holder-big {
     border-radius: 5px 5px 5px 5px;
-    width: 412px;
-    height: 335px;
-    max-width: 412px;
-    max-height: 340px;
     background-color: #969896;
+    min-height: 500px;
     overflow: hidden;
 
 }
@@ -77,6 +73,9 @@
     border-right: 30px;
     margin-right: 15px;
     margin-left: 15px;
+    margin-bottom: 15px;
+    text-decoration: none;
+
 }
 
 
@@ -84,12 +83,16 @@
     padding-top: 10px;
     font-weight: bold;
     font-size: x-large;
+    text-decoration: none;
+
 }
 .name-holder{
     padding-top: 10px;
     font-family: sans-serif;
     font-weight: lighter;
     font-size: larger;
+    text-decoration: none;
+
 
 }
 
@@ -103,6 +106,8 @@
     overflow: hidden;
     text-overflow: ellipsis;
     padding-top: 5px;
+    text-decoration: none;
+
 
 }
 
@@ -147,10 +152,13 @@
     width: 35px;
     background-color: #a3a3a3;
     border-radius: 50%;
-    display: block;
-    isplay: inline-block;
+    display: inline-block;
     overflow: hidden;
     border: 1px solid;
     border-color: #fff;
 
+}
+
+.no-decoration{
+    text-decoration: none;
 }
