@@ -18,7 +18,7 @@
     transition: 0.3s;
     padding-left:16px;
     padding-right:16px;
-    padding-top:3px;
+    padding-top:16px;
     border-radius: 10px;
     box-shadow: 0 0 2px 0 rgba(0,0,0,.1);
     background-color: white;
@@ -37,12 +37,15 @@
     padding-top: 10px;
     font-weight: bold;
     font-size: xx-large;
+    color: #0e9486;
+    margin-bottom: 8px;
 }
 .name-holder-big{
     padding-top: 10px;
     font-family: sans-serif;
     font-weight: lighter;
     font-size: x-large;
+    margin-bottom: 16px;
 
 }
 
