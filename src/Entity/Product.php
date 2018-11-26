@@ -86,6 +86,11 @@ class Product
     private $likedUsers;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    private $numLikes;
+
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\ComentarioProducto", mappedBy="product", orphanRemoval=true)
      */
     private $comentarios;
@@ -104,6 +109,7 @@ class Product
         $this->image = new EmbeddedFile();
         $this->visibility = $this::VISIBLE_ALL;
         $this->likedUsers = new ArrayCollection();
+        $this->numLikes = 0;
         $this->comentarios = new ArrayCollection();
         $this->sold = false;
     }
@@ -248,6 +254,7 @@ class Product
         if (!$this->likedUsers->contains($likedUser)) {
             $likedUser->addLikedProduct($this);
             $this->likedUsers->add($likedUser);
+            $this->numLikes = $this->numLikes + 1;
         }
 
         return $this;
@@ -276,12 +283,23 @@ class Product
         if ($this->likedUsers->contains($likedUser)) {
             $this->likedUsers->removeElement($likedUser);
             $likedUser->removeLikedProduct($this);
+            $this->numLikes = $this->numLikes - 1;
         }
 
         return $this;
 
     }
 
+    public function getNumLikes(): ?int
+    {
+        return $this->numLikes;
+    }
+
+    public function setNumLikes(int $numLikes): self
+    {
+        $this->numLikes = $numLikes;
+    }
+  
     /**
      * @return Collection|ComentarioProducto[]
      */
@@ -300,6 +318,17 @@ class Product
         return $this;
     }
 
+
+    public function getSold(): ?bool
+    {
+        return $this->sold;
+    }
+
+    public function setSold(bool $sold): self
+    {
+        $this->sold = $sold;
+    }
+  
     public function removeComentario(ComentarioProducto $comentario): self
     {
         if ($this->comentarios->contains($comentario)) {
