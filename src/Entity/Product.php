@@ -317,17 +317,6 @@ class Product
 
         return $this;
     }
-
-
-    public function getSold(): ?bool
-    {
-        return $this->sold;
-    }
-
-    public function setSold(bool $sold): self
-    {
-        $this->sold = $sold;
-    }
   
     public function removeComentario(ComentarioProducto $comentario): self
     {

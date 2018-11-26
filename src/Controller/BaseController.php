@@ -29,7 +29,6 @@ class BaseController extends AbstractController
 
         }
         if(sizeof($products) == 0){
-            ///$products = $this->getDoctrine()->getManager()->getRepository('App:Product')-> findAll();
             $products = $this->getDoctrine()->getManager()->getRepository('App:Product')->findBy(['sold'=>false], ['numLikes'=>'DESC']);
         }
 
