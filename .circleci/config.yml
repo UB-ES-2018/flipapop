@@ -9,7 +9,7 @@ jobs:
       # specify the version you desire here
       - image: circleci/php:7.2-browsers
       - image: circleci/postgres:10
-      - image: docker.elastic.co/elasticsearch/elasticsearch:5.4.2
+      - image: docker.elastic.co/elasticsearch/elasticsearch:5.4.3
         environment:
           POSTGRES_USER: root
 
@@ -31,7 +31,6 @@ jobs:
           - v1-dependencies-
 
       - run: composer install -n --prefer-dist
-      - run: php bin/console fos:elastica:populate
 
       - save_cache:
           paths:
