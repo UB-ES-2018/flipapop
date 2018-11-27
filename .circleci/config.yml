@@ -36,7 +36,7 @@ jobs:
             - vendor
           key: v1-dependencies-{{ checksum "composer.lock" }}
 
-      - run: ./vendor/bin/phpunit --log-junit ~/phpunit/junit.xml
+      - run: ./bin/phpunit --log-junit ~/phpunit/junit.xml
       - store_test_results:
                 path: ~/phpunit
       - store_artifacts:
