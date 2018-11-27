@@ -57,7 +57,7 @@
         {% endfor %}
         <div class="reply-textarea">
             <div class="reply-dot-image">
-                {%  if app.user.image is not null %}
+                {%  if app.user is not null and app.user.image is not null %}
                     <img class="reply-user-image" src="{{ vich_uploader_asset(app.user, 'imageFile') }}">
                 {% else %}
                     <i class="fas fa-user reply-empty-user-image" style="color: white"></i>

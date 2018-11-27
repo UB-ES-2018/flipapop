@@ -19,6 +19,12 @@ class UserRepository extends ServiceEntityRepository
         parent::__construct($registry, User::class);
     }
 
+    public function getRandomUser(){
+        $users = $this->findAll();
+        $size = sizeof($users);
+        return $users[random_int(0,$size-1)];
+    }
+
 //    /**
 //     * @return User[] Returns an array of User objects
 //     */

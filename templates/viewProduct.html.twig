@@ -136,7 +136,7 @@
             var newComment = $('<div class="row parent-comment" data-id="'+data.id+'">' +
                                 '<div class="col-1" style="margin-right: 8px">' +
                                 '        <div class="comment-dot-image">' +
-                                '        {% if app.user.image is not null %}' +
+                                '        {% if app.user is not null and app.user.image is not null %}' +
                                 '            <img class="comment-user-image" src="{{ vich_uploader_asset(app.user,'imageFile') }}">' +
                                 '        {% endif %}' +
                                 '        </div>' +
@@ -158,7 +158,7 @@
                 '                      <div class="reply-block">' +
                 '        <div class="reply-textarea">' +
                 '            <div class="reply-dot-image">' +
-                '                {% if app.user.image is not null %}' +
+                '                {% if app.user is not null and app.user.image is not null %}' +
                 '                    <img class="reply-user-image" src="{{ vich_uploader_asset(app.user, 'imageFile') }}">' +
             '                {% else %}' +
             '                    <i class="fas fa-user reply-empty-user-image" style="color: white"></i>' +
