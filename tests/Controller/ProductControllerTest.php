@@ -1,5 +1,6 @@
 <?php
 
+use App\Controller\ProductController;
 use App\DataFixtures\ProductFixtures;
 use App\DataFixtures\UserFixtures;
 use App\Entity\User;
@@ -51,6 +52,9 @@ class ProductControllerTest extends WebTestCase
 
     }
 
+    /**
+     * @covers ProductController::viewProduct()
+     */
     public function testViewProduct()
     {
         //reiniciamos el cliente para empezar sin usuario logueado
