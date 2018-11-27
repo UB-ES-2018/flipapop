@@ -53,13 +53,9 @@ class ProductControllerTest extends WebTestCase
     }
 
     /**
-     * @covers ProductController::viewProduct()
      */
     public function testViewProduct()
     {
-        //reiniciamos el cliente para empezar sin usuario logueado
-        $this->client = static::createClient();
-
         //Primero pruebo que la vista de producto devuelva un 200 sin estar logueado (OK)
         $this->client = static::createClient();
 
@@ -98,6 +94,9 @@ class ProductControllerTest extends WebTestCase
     }
 
     /**
+     *
+     * @coversNothing
+     *
      * Log in de un usuario cualquiera cargado de las Fixtures
      */
     protected function logIn(){
