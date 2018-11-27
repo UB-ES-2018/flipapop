@@ -31,6 +31,7 @@ jobs:
           - v1-dependencies-
 
       - run: composer install -n --prefer-dist
+      - run: php bin/console fos:elastica:populate,
 
       - save_cache:
           paths:
