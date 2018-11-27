@@ -53,6 +53,9 @@ class ProductControllerTest extends WebTestCase
 
     public function testViewProduct()
     {
+        //reiniciamos el cliente para empezar sin usuario logueado
+        $this->client = static::createClient();
+
         //Primero pruebo que la vista de producto devuelva un 200 sin estar logueado (OK)
         $this->client = static::createClient();
 
@@ -86,6 +89,7 @@ class ProductControllerTest extends WebTestCase
             0,
             $crawler->filter('#newComment')->count()
         );
+
 
     }
 
