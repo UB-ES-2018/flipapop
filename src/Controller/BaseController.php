@@ -4,7 +4,7 @@ namespace App\Controller;
 
 
 use FOS\ElasticaBundle\Finder\TransformedFinder;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use function sizeof;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
