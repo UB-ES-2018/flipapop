@@ -1,7 +1,6 @@
 .navbar{
     box-shadow: 0 2px 4px 0 rgba(37,50,56,.03);
     background-color: #fff;
-    height: 66px;
     border-bottom: 1px solid;
     border-color: rgba(207,216,220,.5)
 }
@@ -23,11 +22,12 @@
 
 .registerform{
     padding-top: 15px;
-    box-shadow: 5px 5px 6px -3px #000000;
+    box-shadow: 2px 2px 2px 0 rgba(0,0,0,.50);
     padding-bottom: 15px;
     padding-left: 15px;
-    border: 2px solid #1C6EA4;
     border-radius: 10px;
+    background-color: white;
+    margin-bottom: 32px;
 }
 
 .active-cyan-2 input[type=text]:focus:not([readonly]) {
@@ -43,10 +43,40 @@
     color: #4dd0e1;
 }
 
-.btn-primary{
-    background-color: #13c1ac;
+.fa-angle-down{
+    color: #0b897d;
 }
 
+.navbar-toggler:focus{
+    border: none;
+    outline: none;
+}
+
+.navbar-toggler:active{
+    border: none;
+}
+
+.navbar-toggler{
+    border: 0;
+    outline: 0;
+    -moz-appearance:none;
+}
+
+.btn-primary{
+    border-radius: 20px;
+    text-decoration: none;
+    border: none;
+    background-color: #13c1ac;
+
+}
+
+.btn-primary:hover{
+    background-color: #0b897d;
+}
+
+.btn-primary i{
+    margin-right: 4px;
+}
 .vich-image{
     max-width: 250px;
 }
@@ -217,4 +247,18 @@
 .reply-user-image{
     height: 30px;
     width: 30px;
+}
+
+#login{
+    font-size: large;
+    align-self: center;
+    justify-self: center;
+    min-width: 80px;
+}
+
+#register{
+    font-size: large;
+    align-self: center;
+    justify-self: center;
+    min-width: 80px;
 }
