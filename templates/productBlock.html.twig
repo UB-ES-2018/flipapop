@@ -29,6 +29,15 @@
         </span>
          <span><a class="actionButton" data-id="{{ product.id }}" data-toggle="dropdown" href="#" title="Editar visiblididad"><i class="fas fa-caret-down"></i></a></span>
     </div>
+
+        <div class="col">
+            {% if app.user is not null and product.getSold() %}
+                <i data-id="{{ product.id }}" class="fas fa-handshake sold fa-2x"></i>
+            {% else %}
+                <i data-id="{{ product.id }}" class="far fa-handshake fa-2x"></i>
+            {% endif %}
+        </div>
+
     {% else %}
     <div class="col">
         {{ product.description }}

@@ -1,26 +1,35 @@
-<div class="card">
-    <div class="image-holder">
-        {%  if product.image is not null%}
-            <img id="side-bar-profile-image" src="{{ vich_uploader_asset(product, 'imageFile') }}">
-        {% endif %}
-    </div>
-    <div class="card-bottom">
-        <div class="price-holder"> {{product.price}}€</div>
-        <div class="name-holder">
-           {{ product.name }}
+<a class="no-decoration" style="text-decoration: none; color: black" href="{{ path('view_product', {'idProducto': product.id}) }}">
+    <div class="card">
+        <div class="image-holder">
+            {%  if product.image is not null%}
+                <img id="side-bar-profile-image" src="{{ vich_uploader_asset(product, 'imageFile') }}" height="100%">
+            {% endif %}
         </div>
-        <div class="description-holder">
-            {{ product.description }}
-        </div>
-        <div class="like-holder" align="right">
+        <div class="card-bottom">
+            <div class="price-holder"> {{product.price}}€</div>
+            <div class="name-holder">
+                {{ product.name }}
+            </div>
+            <div class="description-holder">
+                {{ product.description }}
+            </div>
+            <div align="center">
+                {%  if product.getSold() %}
+                    <i data-id="{{ product.id }}" style="color: darkcyan;" title="SOLD!" class="fas fa-handshake fa-3x"></i>
+                {% endif %}
+            </div>
+            <div class="like-holder" align="right">
             <span class="n-likes">
                 {{ product.likedUsers | length }}
             </span>
             {% if app.user is not null and product.isLikedBy(app.user) %}
                 <i data-id="{{ product.id }}" class="fas fa-heart liked"></i>
-            {% else %}
+            {% elseif app.user is not null %}
                 <i data-id="{{ product.id }}" class="far fa-heart"></i>
+            {% else %}
+                <i data-id="{{ product.id }}" class="fas fa-heart liked"></i>
             {% endif %}
         </div>
     </div>
-</div>
+    </div>
+</a>

@@ -28,16 +28,16 @@ class WebsiteController extends AbstractController
         $hostname = $request->getHost();
 
         $urls[] = ['loc' => $this->get('router')->generate('landing_page'), 'changefreq' => 'weekly', 'priority' => '1.0'];
-        //$urls[] = ['loc' => $this->get('router')->generate('mywebsite_blog'), 'changefreq' => 'weekly', 'priority' => '1.0'];
 
-        // Then, we will find all our articles stored in the database
-        $articlesRepository = $this->getDoctrine()->getRepository('App:Product');
-        $articles = $articlesRepository->findAll();
+        // Then, we will find all our products stored in the database
+        $products = $this->getDoctrine()->getRepository('App:Product')->findAll();
 
         // We loop on them
-        /*foreach ($products as $product) {
-            $urls[] = ['loc' => $this->get('router')->generate('mywebsite_article', ['title' => $product->getName()]), 'changefreq' => 'weekly', 'priority' => '1.0'];
-        }*/
+        foreach ($products as $product) {
+            if($product->getVisibility()==1){
+                $urls[] = ['loc' => $this->get('router')->generate('view_product', array('idProduct' => $product->getId())), 'changefreq' => 'weekly', 'priority' => '1.0'];
+            }
+        }
 
         // Once our array is filled, we define the controller response
         $response = new Response();
