@@ -59,11 +59,16 @@ class ProductController extends AbstractController
             // TODO: Excepciones bonitas
             return new Exception();
         }
+        dd($request->headers->get('User-Agent'));
         $em = $this->getDoctrine()->getManager();
         $producto = $em->getRepository(Product::class)->find($idProducto);
 
         if(is_null($producto)){
             // TODO: Excepciones bonitas
+            return new Exception();
+        }
+
+        if(!$producto->canView($this->getUser())){
             return new Exception();
         }
 
