@@ -1,0 +1,21 @@
+
+<div class="col-sm col-lg-5 comments-block">
+    <h4>Comments</h4>
+    <div id="comments">
+        {% for parentComment in comentarios %}
+            {% include 'parentComment.html.twig' %}
+        {% endfor %}
+    </div>
+    {% if app.user %}
+    <div class="row-fluid" style="margin-top: 16px">
+        <form id="commentForm">
+            <div class="form-group">
+                <textarea class="form-control" id="comment-text" placeholder="Ask the seller" rows="4"></textarea>
+            </div>
+            <button type="button" id="newComment" class="btn btn-outline-primary">COMMENT</button>
+        </form>
+    </div>
+    <br>
+    {% endif %}
+    <br>
+</div>

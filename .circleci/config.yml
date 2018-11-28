@@ -9,6 +9,7 @@ jobs:
       # specify the version you desire here
       - image: circleci/php:7.2-browsers
       - image: circleci/postgres:10
+      - image: docker.elastic.co/elasticsearch/elasticsearch:5.4.3
         environment:
           POSTGRES_USER: root
 
@@ -36,4 +37,9 @@ jobs:
             - vendor
           key: v1-dependencies-{{ checksum "composer.lock" }}
 
+      - run: ./bin/phpunit --log-junit ~/phpunit/junit.xml
+      - store_test_results:
+                path: ~/phpunit
+      - store_artifacts:
+                path: ~/phpunit
       

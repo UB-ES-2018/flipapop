@@ -85,12 +85,33 @@ class Product
      */
     private $likedUsers;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $numLikes;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ComentarioProducto", mappedBy="product", orphanRemoval=true)
+     */
+    private $comentarios;
+
+    /**
+     *
+     * NOTE: The product is sold or not.
+     *
+     * @ORM\Column(type="boolean")
+     */
+    private $sold;
+
 
     public function __construct()
     {
         $this->image = new EmbeddedFile();
         $this->visibility = $this::VISIBLE_ALL;
         $this->likedUsers = new ArrayCollection();
+        $this->numLikes = 0;
+        $this->comentarios = new ArrayCollection();
+        $this->sold = false;
     }
 
     /**
@@ -192,7 +213,25 @@ class Product
         $this->visibility = $visibility;
         return $this;
     }
-  
+
+
+    public function getSold()
+    {
+        return $this->sold;
+    }
+
+    public function setSold($sold): self
+    {
+        $this->sold = $sold;
+        return $this;
+    }
+
+    public function changeSold(): self
+    {
+        $this->sold = !$this->sold;
+        return $this;
+    }
+
     public function isLikedBy(User $user){
         foreach ($this->likedUsers as $u){
             if($u->getId() === $user->getId()){
@@ -215,6 +254,7 @@ class Product
         if (!$this->likedUsers->contains($likedUser)) {
             $likedUser->addLikedProduct($this);
             $this->likedUsers->add($likedUser);
+            $this->numLikes = $this->numLikes + 1;
         }
 
         return $this;
@@ -243,9 +283,51 @@ class Product
         if ($this->likedUsers->contains($likedUser)) {
             $this->likedUsers->removeElement($likedUser);
             $likedUser->removeLikedProduct($this);
+            $this->numLikes = $this->numLikes - 1;
         }
 
         return $this;
 
+    }
+
+    public function getNumLikes(): ?int
+    {
+        return $this->numLikes;
+    }
+
+    public function setNumLikes(int $numLikes): self
+    {
+        $this->numLikes = $numLikes;
+    }
+  
+    /**
+     * @return Collection|ComentarioProducto[]
+     */
+    public function getComentarios(): Collection
+    {
+        return $this->comentarios;
+    }
+
+    public function addComentario(ComentarioProducto $comentario): self
+    {
+        if (!$this->comentarios->contains($comentario)) {
+            $this->comentarios[] = $comentario;
+            $comentario->setProduct($this);
+        }
+
+        return $this;
+    }
+  
+    public function removeComentario(ComentarioProducto $comentario): self
+    {
+        if ($this->comentarios->contains($comentario)) {
+            $this->comentarios->removeElement($comentario);
+            // set the owning side to null (unless already changed)
+            if ($comentario->getProduct() === $this) {
+                $comentario->setProduct(null);
+            }
+        }
+
+        return $this;
     }
 }
