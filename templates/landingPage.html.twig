@@ -5,7 +5,7 @@
     <div class="row">
         {% for product in products %}
             {% if product.canView(app.user) %}
-                <div class="col cardholder">
+                <div class="col col-lg-2 mr-4 cardholder">
                   {% include 'cards/productCard.html.twig' %}
                 </div>
             {% endif %}
