@@ -56,8 +56,10 @@
                     {{ product.name }}
                 </div>
                 <div class="description-holder-big">
-                    {{ product.description }}
+                    <p>{{ product.description }}</p>
+                    <p>{{ product.category }}</p>
                 </div>
+
             </div>
         </div>
         {% include 'commentsBlock.html.twig' %}

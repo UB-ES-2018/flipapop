@@ -37,11 +37,13 @@
                 <i data-id="{{ product.id }}" class="far fa-handshake fa-2x"></i>
             {% endif %}
         </div>
-
     {% else %}
     <div class="col">
         {{ product.description }}
     </div>
     {% endif %}
+    <div class="col">
+        {{ product.category }}
+    </div>
 
 </div>
