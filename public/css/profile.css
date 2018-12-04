@@ -6,10 +6,11 @@
 }
 
 .sidebar {
-    width: 90px;
+
     position: fixed;
     padding-top: 80px;
     padding-left: 5px;
+    padding-right: 10px;
     top: 0;
     left: 0;
     height: 100vh;
@@ -61,7 +62,7 @@
 }
 
 .profile-content{
-    padding-left: 120px;
+    padding-left: 150px;
 }
 .profile-block{
     background-color: #fff;

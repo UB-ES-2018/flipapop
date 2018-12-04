@@ -2,7 +2,41 @@
 
 {% block body %}
 
-    <div class="row">
+
+<div class="wrapper">
+
+    <nav class="sidebar d-md-inline-flex">
+        <ul class="list-unstyled components" >
+            <form class="md-form">
+                <h4>
+                    Filters
+                </h4>
+
+
+                {% for category in categories %}
+
+                        <div class="form-group custom-control custom-checkbox ">
+
+                            <input type="checkbox" class="custom-control-input" id="category-{{ category }}" name="{{ category }}">
+                            <label class="custom-control-label" for="category-{{ category }}">{{ category }}</label>
+
+                        </div>
+
+
+                {%  endfor %}
+                <div class="col d-flex flex-column align-self-end">
+                    <input type="submit" value="Search" class="btn btn-primary ">
+
+                </div>
+
+            </form>
+        </ul>
+
+
+    </nav>
+
+
+    <div class="row profile-content">
         {% for product in products %}
             {% if product.canView(app.user) %}
                 <div class="col-md-2 cardholder">
@@ -11,6 +45,7 @@
             {% endif %}
         {% endfor %}
     </div>
+</div>
 {% endblock %}
 
 {% block javascripts %}
