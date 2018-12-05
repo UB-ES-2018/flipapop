@@ -35,6 +35,24 @@ class ProductFixtures extends BaseFixture
             return $product;
         });
 
+        $this->createMany(Product::class, 10, function (Product $product,$i) {
+            $product->setUsuario($this->userRepository->getRandomUser());
+            $product->setName("product".$i);
+            $product->setDescription($this->faker->text);
+            $product->setPrice($this->faker->randomNumber());
+            $product->setVisibility(Product::VISIBLE_LOGGED);
+            return $product;
+        });
+
+        $this->createMany(Product::class, 10, function (Product $product,$i) {
+            $product->setUsuario($this->userRepository->getRandomUser());
+            $product->setName("product".$i);
+            $product->setDescription($this->faker->text);
+            $product->setPrice($this->faker->randomNumber());
+            $product->setVisibility(Product::VISIBLE_ME);
+            return $product;
+        });
+
         $manager->flush();
     }
 }
