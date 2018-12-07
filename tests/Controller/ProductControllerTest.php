@@ -36,6 +36,7 @@ class ProductControllerTest extends WebTestCase
 
         $metadatas = $entityManager->getMetadataFactory()->getAllMetadata();
         $schemaTool = new SchemaTool($entityManager);
+        $schemaTool->dropSchema($metadatas);
         $schemaTool->updateSchema($metadatas);
 
         $encoder = $container->get('security.user_password_encoder.generic');
