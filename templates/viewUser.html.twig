@@ -9,29 +9,29 @@
             <table style="width:100%">
                 <td style="width:3%">
                     <div class="dot-image_user_profile">
-                        {%  if product.usuario.image is not null%}
-                            <img id="side-bar-profile-image" src="{{ vich_uploader_asset(product.usuario, 'imageFile') }}">
+                        {%  if usuario.image is not null%}
+                            <img id="side-bar-profile-image" src="{{ vich_uploader_asset(usuario, 'imageFile') }}">
                         {% endif %}
                     </div>
                 </td>
                 <td style="width:40%" >
                     <div class="name-surname-holder-big">
-                        <b>{{ product.usuario.getFullUserName() }}</b>
+                        <b>{{ usuario.getFullUserName() }}</b>
                     </div>
                 </td>
                 <td style="width:7%">
-                    <div align="center" > <b>{{ product.usuario.products.count() }}</b></div> <div align="center"> {{ "products" }}</div>
+                    <div align="center" > <b>{{ usuario.products.count() }}</b></div> <div align="center"> {{ "products" }}</div>
                 </td>
                 <td style="width:50%"> </td>
             </table>
             <div class="card-bottom">
                 <spam> <b>{{"User's descripcion:  " }} </b></spam>
-                <spam class="description-holder"> {{ product.usuario.description }} </spam>
+                <spam class="description-holder"> {{ usuario.description }} </spam>
             </div>
 
         </div>
         <div class="row">
-            {% for product in product.usuario.products %}
+            {% for product in usuario.products %}
                 {% if product.canView(app.user) %}
                     <div class="col-md-2 cardholder">
                         {% include 'cards/productCard.html.twig' %}
