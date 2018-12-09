@@ -9,6 +9,7 @@
 namespace App\Form\Type;
 
 
+use App\Entity\Category;
 use App\Entity\Product;
 use Doctrine\DBAL\Types\FloatType;
 use Symfony\Component\Form\AbstractType;
@@ -61,7 +62,26 @@ class ProductType extends AbstractType
             'required' => false,
         ));
 
+        $builder->add('category', ChoiceType::class, array(
+            'required' => true,
+            'empty_data' => false,
+            'choices' => $this->getCategories(),
+            'constraints' => new NotBlank(['message' => 'Este campo es obligatorio'])
+        ));
 
+
+    }
+
+    private function getCategories() {
+        return array(
+            "Deporte y Ocio" => new Category('Deporte y Ocio'),
+            "Hogar y Jardin" => new Category('Hogar y Jardin'),
+            "Informatica y Electronica" => new Category('Informatica y Electronica'),
+            "Moda y Accesorios" => new Category('Moda y Accesorios'),
+            "Niños y Bebes" => new Category('Niños y Bebes'),
+            "TV, Audio y Foto" => new Category('TV, Audio y Foto'),
+            "Otros" => new Category('Otros'),
+        );
     }
 
     private function getVisibilidad(){

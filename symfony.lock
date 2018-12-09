@@ -95,9 +95,6 @@
             "ref": "3f73f240ee0c3719e89f1c994ce66904e2ef84f6"
         }
     },
-    "fzaninotto/faker": {
-        "version": "v1.8.0"
-    },
     "guzzlehttp/ringphp": {
         "version": "1.1.1"
     },
