@@ -104,6 +104,29 @@ class UserController extends AbstractController
             ));
     }
 
+    /**
+     * @param Request $request
+     * @param $idUser
+     * @Route("/user/{idUser}", name="view_user")
+     */
+    public function viewUser(Request $request, $idUser){
+        if(is_null($idUser)){
+            // TODO: Excepciones bonitas
+            return new Exception();
+        }
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository(User::class)->find($idUser);
+
+        if(is_null($user)){
+            // TODO: Excepciones bonitas
+            return new Exception();
+        }
+
+        return $this->render('viewUser.html.twig', array(
+            'user' => $user
+        ));
+
+    }
 
 }
 
