@@ -7,6 +7,7 @@ use App\Entity\User;
 use App\Form\Type\UserProfileType;
 use App\Form\Type\UserType;
 use App\Security\LoginFormAuthenticator;
+use Exception;
 use function is_null;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -103,6 +104,28 @@ class UserController extends AbstractController
 
             ));
     }
+
+    /**
+     * @param Request $request
+     * @Route("/view/user/{id}", name="view_user")
+     */
+    public function viewUser(Request $request, $id= null){
+
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository(User::class)->find($id);
+
+        if(is_null($user)){
+            // TODO: Excepciones bonitas
+            return new Exception();
+        }
+
+
+        return $this->render('viewUser.html.twig', array(
+            'user' => $user
+        ));
+    }
+
+
 
 
 }
