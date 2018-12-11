@@ -9,7 +9,7 @@ jobs:
       # specify the version you desire here
       - image: circleci/php:7.2-browsers
       - image: circleci/postgres:10
-      - image: docker.elastic.co/elasticsearch/elasticsearch:5.4.3
+      - image: docker.elastic.co/elasticsearch/elasticsearch:6.5.1
         environment:
           POSTGRES_USER: root
 
