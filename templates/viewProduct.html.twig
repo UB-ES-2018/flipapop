@@ -14,20 +14,17 @@
                         {% endif %}
                     </div>
                 </td>
-
-
                 <td style="width:60%">
                 <span class="name-surname-holder-big">
                 {{ product.usuario.name }}
                     {{ product.usuario.surname }}
                 </span>
                     <div>{{ product.usuario.products.count() }} {{ "products" }}</div>
-
                 </td>
                 {% if product.sold %}
-                <td style="width: 15%">
-                    <i data-id="{{ product.id }}" title="SOLD!" style="color: #0e9486" class="fas fa-handshake fa-2x"></i>
-                </td>
+                    <td style="width: 15%">
+                        <i data-id="{{ product.id }}" title="SOLD!" style="color: #0e9486" class="fas fa-handshake fa-2x"></i>
+                    </td>
                 {% endif %}
                 <td style="width:15%">
                     <div class="like-holder" >
@@ -43,7 +40,6 @@
                         {% endif %}
                     </div>
                 </td>
-
             </table>
             <div class="image-holder-big">
                 {%  if product.image is not null%}
@@ -61,20 +57,16 @@
             </div>
         </div>
         {% include 'commentsBlock.html.twig' %}
-
     </div>
-
-
 {% endblock %}
-
 {% block javascripts %}
     {{ parent() }}
     <script type="text/javascript">
         var productID = {{ product.id | raw }};
         {% if app.user %}
-            var userID = {{ app.user.id | raw }};
+        var userID = {{ app.user.id | raw }};
         {% else %}
-            var userID;
+        var userID;
         {% endif %}
         $('#newComment').click(function (e) {
             e.preventDefault();
@@ -90,17 +82,12 @@
                     appendComent(data[0]);
                     $('.comment-reply-button').click(function (e){
                         e.preventDefault();
-
                         $(this).parent().parent().children('.reply-block').css('display', 'block');
                         $(this).parent().parent().children('.reply-block').children('.reply-textarea').children('.reply').focus();
-
-
                     });
                 });
             }
-
         });
-
         $('.reply').keyup(function(e){
             if(e.keyCode == 13)
             {
@@ -115,68 +102,59 @@
                         data: {product: productID, user: userID, text: answer, parent: parent},
                         dataType: "json"
                     }).done(function (data) {
-
                         appendReply(parentReplyBlock,data[0]);
                     });
                 }
                 textArea.val("");
             }
         });
-
         $('.comment-reply-button').click(function (e){
             e.preventDefault();
-
             $(this).parent().parent().children('.reply-block').css('display', 'block');
             $(this).parent().parent().children('.reply-block').children('.reply-textarea').children('.reply').focus();
-
-
         });
-
         function appendComent(data) {
             var newComment = $('<div class="row parent-comment" data-id="'+data.id+'">' +
-                                '<div class="col-1" style="margin-right: 8px">' +
-                                '        <div class="comment-dot-image">' +
-                                '        {% if app.user is not null and app.user.image is not null %}' +
-                                '            <img class="comment-user-image" src="{{ vich_uploader_asset(app.user,'imageFile') }}">' +
-                                '        {% endif %}' +
-                                '        </div>' +
-                                '    </div>' +
-                                '    <div class="col-10" style="padding-left: 30px">' +
-                                '        <div class="row comment-user-name">' +
-                                '        </div>' +
-                                '        <div class="row comment-text">' +
-                                '            <div class="col text">' +
-                                '            </div>' +
-                                '        </div>' +
-                                '        <div class="comment-reply-button">' +
-                                '            <a>Reply</a>' +
+                '<div class="col-1" style="margin-right: 8px">' +
+                '        <div class="comment-dot-image">' +
+                '        {% if app.user is not null and app.user.image is not null %}' +
+                '            <img class="comment-user-image" src="{{ vich_uploader_asset(app.user,'imageFile') }}">' +
+                '        {% endif %}' +
+                '        </div>' +
+                '    </div>' +
+                '    <div class="col-10" style="padding-left: 30px">' +
+                '        <div class="row comment-user-name">' +
+                '        </div>' +
+                '        <div class="row comment-text">' +
+                '            <div class="col text">' +
+                '            </div>' +
+                '        </div>' +
+                '        <div class="comment-reply-button">' +
+                '            <a>Reply</a>' +
                 '                           <i class="fas fa-comment-alt"></i><span>0</span>' +
-                                '        </div>' +
-                                '    </div>' +
-                                '    <div class="row comment-date">' +
-                                '   </div>' +
+                '        </div>' +
+                '    </div>' +
+                '    <div class="row comment-date">' +
+                '   </div>' +
                 '                      <div class="reply-block">' +
                 '        <div class="reply-textarea">' +
                 '            <div class="reply-dot-image">' +
                 '                {% if app.user is not null and app.user.image is not null %}' +
                 '                    <img class="reply-user-image" src="{{ vich_uploader_asset(app.user, 'imageFile') }}">' +
-            '                {% else %}' +
-            '                    <i class="fas fa-user reply-empty-user-image" style="color: white"></i>' +
-            '                {% endif %}' +
-            '            </div>' +
-            '            <textarea class="reply" placeholder="Write a reply..."></textarea>' +
-            '' +
-            '        </div>' +
-            '' +
-            '    </div>' +
-                             '</div>');
-
+                '                {% else %}' +
+                '                    <i class="fas fa-user reply-empty-user-image" style="color: white"></i>' +
+                '                {% endif %}' +
+                '            </div>' +
+                '            <textarea class="reply" placeholder="Write a reply..."></textarea>' +
+                '' +
+                '        </div>' +
+                '' +
+                '    </div>' +
+                '</div>');
             newComment.children('.col-10').children('.comment-user-name').html(data.name);
             newComment.children('.col-10').children('.comment-text').children('.text').html(data.text);
             newComment.children('.comment-date').html(data.datetime);
-
             $('#comments').append(newComment);
-
             $('.reply').keyup(function(e){
                 if(e.keyCode == 13)
                 {
@@ -191,67 +169,51 @@
                             data: {product: productID, user: userID, text: answer, parent: parent},
                             dataType: "json"
                         }).done(function (data) {
-
                             appendReply(parentReplyBlock,data[0]);
                         });
                     }
                     textArea.val("");
                 }
             });
-
             $('.comment-reply-button').click(function (e){
                 e.preventDefault();
                 if($(this).parent().parent().children('.reply-block').css('display') === 'none') {
-
-
                     $(this).parent().parent().children('.reply-block').css('display', 'block');
                     $(this).parent().parent().children('.reply-block').children('.reply-textarea').children('.reply').focus();
-
                 }else{
                     $(this).parent().parent().children('.reply-block').css('display', 'none');
-
                 }
             });
-
         }
-
-
-
-
         function appendReply(parentReplyBlock,data) {
             var newReply = $('<div class="row son-comment" data-id="">' +
                 '                <div class="col-1" style="margin-right: 8px">' +
                 '                    <div class="reply-dot-image">' +
                 '                        {% if app.user is not null %}' +
                 '                            <img class="reply-user-image" src="{{ vich_uploader_asset(app.user, 'imageFile') }}">' +
-            '                        {% else %}' +
-            '                            <i class="fas fa-user reply-empty-user-image" style="color: white"></i>' +
-            '                        {% endif %}' +
-            '                    </div>' +
-            '                </div>' +
-            '                <div class="col-10" style="padding-left: 30px">' +
-            '                    <div class="row comment-user-name">' +
-            '                    </div>' +
-            '                    <div class="row comment-text">' +
-            '                        <div class="col text">' +
-            '                        </div>' +
-            '                    </div>' +
-            '                </div>' +
-            '                <div class="row reply-date">' +
-            '                </div>' +
-            '            </div>');
-
+                '                        {% else %}' +
+                '                            <i class="fas fa-user reply-empty-user-image" style="color: white"></i>' +
+                '                        {% endif %}' +
+                '                    </div>' +
+                '                </div>' +
+                '                <div class="col-10" style="padding-left: 30px">' +
+                '                    <div class="row comment-user-name">' +
+                '                    </div>' +
+                '                    <div class="row comment-text">' +
+                '                        <div class="col text">' +
+                '                        </div>' +
+                '                    </div>' +
+                '                </div>' +
+                '                <div class="row reply-date">' +
+                '                </div>' +
+                '            </div>');
             newReply.children('.col-10').children('.comment-user-name').html(data.name);
             newReply.children('.col-10').children('.comment-text').children('.text').html(data.text);
             newReply.children('.reply-date').html(data.datetime);
             newReply.data('id', data.id);
-
-
             newReply.insertBefore(parentReplyBlock);
-
             var n = parseInt(parentReplyBlock.parent().parent().children('.col-10').children('.comment-reply-button').children('span').html());
             parentReplyBlock.parent().parent().children('.col-10').children('.comment-reply-button').children('span').html(n+1);
-
         }
 
         $('.fa-heart').click(function (event) {
