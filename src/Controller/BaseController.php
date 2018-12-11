@@ -8,18 +8,21 @@ use Symfony\Component\Routing\Annotation\Route;
 use function sizeof;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Debug\Debug;
+Debug::enable();
 
 /**
  * Class BaseController
  * @package App\Controller
  * @Route("/index")
  */
-class BaseController extends AbstractController
-{
+class BaseController extends AbstractController {
     /**
      * @Route("/", name="landing_page")
      */
+
     public function index(Request $request, TransformedFinder $finder){
+
 
         $searchData = $request->get('searchbar');
 
