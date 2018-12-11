@@ -103,6 +103,11 @@ class Product
      */
     private $sold;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Category")
+     */
+    private $category;
+
 
     public function __construct()
     {
@@ -327,6 +332,18 @@ class Product
                 $comentario->setProduct(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(string $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }
