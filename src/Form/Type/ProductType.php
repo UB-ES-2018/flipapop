@@ -12,6 +12,8 @@ namespace App\Form\Type;
 use App\Entity\Category;
 use App\Entity\Product;
 use Doctrine\DBAL\Types\FloatType;
+use Doctrine\ORM\Mapping\Entity;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -62,26 +64,14 @@ class ProductType extends AbstractType
             'required' => false,
         ));
 
-        $builder->add('category', ChoiceType::class, array(
+        $builder->add('category', EntityType::class, array(
             'required' => true,
             'empty_data' => false,
-            'choices' => $this->getCategories(),
+            'class' => Category::class,
             'constraints' => new NotBlank(['message' => 'Este campo es obligatorio'])
         ));
 
 
-    }
-
-    private function getCategories() {
-        return array(
-            "Deporte y Ocio" => new Category('Deporte y Ocio'),
-            "Hogar y Jardin" => new Category('Hogar y Jardin'),
-            "Informatica y Electronica" => new Category('Informatica y Electronica'),
-            "Moda y Accesorios" => new Category('Moda y Accesorios'),
-            "Niños y Bebes" => new Category('Niños y Bebes'),
-            "TV, Audio y Foto" => new Category('TV, Audio y Foto'),
-            "Otros" => new Category('Otros'),
-        );
     }
 
     private function getVisibilidad(){

@@ -104,7 +104,8 @@ class Product
     private $sold;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Category")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="products")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $category;
 
@@ -341,7 +342,7 @@ class Product
         return $this->category;
     }
 
-    public function setCategory(string $category): self
+    public function setCategory(?Category $category): self
     {
         $this->category = $category;
 

@@ -8,9 +8,9 @@
         <div class="col-sm col-lg-6  view-product">
             <table style="width:100%">
                 <td style="width:10%">
-                    <div class="dot-image">
+                    <div class="product-dot-image">
                         {%  if product.usuario.image is not null%}
-                            <img id="side-bar-profile-image" src="{{ vich_uploader_asset(product.usuario, 'imageFile') }}">
+                            <img class="product-user-image" src="{{ vich_uploader_asset(product.usuario, 'imageFile') }}">
                         {% endif %}
                     </div>
                 </td>
@@ -51,6 +51,9 @@
                 {% endif %}
             </div>
             <div class="card-bottom">
+                <div class="category-holder">
+                    {{ product.category.getName()}}
+                </div>
                 <div class="price-holder-big"> {{product.price}}€</div>
                 <div class="name-holder-big">
                     {{ product.name }}
@@ -58,9 +61,7 @@
                 <div class="description-holder-big">
                     {{ product.description }}
                 </div>
-                <div>
-                    {{ product.category.getName()}}
-                </div>
+
 
             </div>
         </div>
