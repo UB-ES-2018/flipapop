@@ -169,9 +169,8 @@
     border-radius: 50%;
     background-color: #828584;
     overflow: hidden;
-    border: 1px solid #13c1ac;
+    display: inline-block;
     max-width: 80px;
-
 }
 
 #edit-profile-image{
