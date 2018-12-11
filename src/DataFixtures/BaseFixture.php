@@ -20,6 +20,7 @@ abstract class BaseFixture extends Fixture
     protected $faker;
 
     abstract protected function loadData(ObjectManager $manager);
+    abstract protected function loadExamples(ObjectManager $manager);
 
     public function load(ObjectManager $manager)
     {
@@ -27,6 +28,14 @@ abstract class BaseFixture extends Fixture
         $this->faker = Factory::create();
 
         $this->loadData($manager);
+    }
+
+    public function load2(ObjectManager $manager)
+    {
+        $this->manager = $manager;
+        $this->faker = Factory::create();
+
+        $this->loadExamples($manager);
     }
 
     protected function createMany(string $className, int $count, callable $factory)
