@@ -9,8 +9,11 @@
 namespace App\Form\Type;
 
 
+use App\Entity\Category;
 use App\Entity\Product;
 use Doctrine\DBAL\Types\FloatType;
+use Doctrine\ORM\Mapping\Entity;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -59,6 +62,13 @@ class ProductType extends AbstractType
 
         $builder->add('imageFile', VichImageType::class, array(
             'required' => false,
+        ));
+
+        $builder->add('category', EntityType::class, array(
+            'required' => true,
+            'empty_data' => false,
+            'class' => Category::class,
+            'constraints' => new NotBlank(['message' => 'Este campo es obligatorio'])
         ));
 
 

@@ -4,30 +4,31 @@
 
 
 <div class="wrapper">
-
+    <form class="md-form" method="POST" action="{{ path('landing_page') }}">
     <nav class="sidebar d-md-inline-flex">
         <ul class="list-unstyled components" >
-            <form class="md-form">
+
                 <h4>
                     Filters
                 </h4>
                 {% for category in categories %}
                         <div class="form-group custom-control custom-checkbox ">
-                            <input type="checkbox" class="custom-control-input" id="category-{{ category.getName() }}" name="{{ category.getName() }}">
+                            <input type="checkbox" class="custom-control-input"  {% if category.id in categoriesSelected %} checked="checked" id="category-{{ category.getName() }}" value="{{ category.id }}" name="{{ category.getName() }}">
                             <label class="custom-control-label" for="category-{{ category.getName() }}">{{ category.getName() }}</label>
                         </div>
                 {%  endfor %}
                 <div class="col d-flex flex-column align-self-end">
-                    <input type="submit" value="Search" class="btn btn-primary ">
+                    <input type="submit" value="" class="btn btn-primary ">
                 </div>
-            </form>
+
         </ul>
     </nav>
+    </form>
 
     <div class="row profile-content">
         {% for product in products %}
             {% if product.canView(app.user) %}
-                <div class="col-md-2 cardholder">
+                <div class="col col-lg-2 mr-4 cardholder">
                   {% include 'cards/productCard.html.twig' %}
                 </div>
             {% endif %}

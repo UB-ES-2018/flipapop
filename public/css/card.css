@@ -13,8 +13,6 @@
 }
 
 .view-product {
-    margin-left: 32px;
-    margin-right: 32px;
     transition: 0.3s;
     padding-left:16px;
     padding-right:16px;
@@ -73,12 +71,8 @@
 
 
 .cardholder {
-    border-right: 30px;
-    margin-right: 15px;
-    margin-left: 15px;
     margin-bottom: 15px;
     text-decoration: none;
-
 }
 
 
@@ -170,3 +164,8 @@
     color: #13C1AC;
 }
 
+
+.product-profile{
+    display: flex;
+    padding: 0 16px;
+}

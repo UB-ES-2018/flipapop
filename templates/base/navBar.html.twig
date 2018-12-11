@@ -1,29 +1,38 @@
 
-<nav class="navbar navbar-expand-lg fixed-top justify-content-between">
-    <a class="navbar-brand" href="{{ path('landing_page') }}">Flipapop</a>
+<nav class="navbar navbar-expand-lg fixed-top">
+    <a class="navbar-brand h1" href="{{ path('landing_page') }}">Flipapop</a>
+    <button class="navbar-toggler mb-2" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"> <i class="fas fa-angle-down fa-2x"></i></span>
+    </button>
 
-    <!-- Search form -->
-    <form class="form-inline md-form form-sm active-cyan-2" method="post" action="{{ path('landing_page') }}">
-        <input class="form-control form-control-sm mr-3" style="width: 300px" name="searchbar" type="text" placeholder="Search Products" aria-label="Search">
-        <i class="fa fa-search" aria-hidden="true"></i>
-    </form>
-    {% if app.user is not null %}
-        <a class="btn btn-primary" role="button" href="{{ path('new_product') }}">
-            Upload product
-        </a>
-    {% endif %}
-    {% if app.user is null %}
-        <ul class="navbar-nav">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <form class="form-inline active-cyan-2" method="post" action="{{ path('landing_page') }}">
+            <input class="form-control form-control-sm mr-3" style="width: 300px" name="searchbar" type="text" placeholder="Search Products" aria-label="Search">
+            <i class="fa fa-search" aria-hidden="true"></i>
+        </form>
+        <ul class="navbar-nav mr-auto mx-lg-5 mt-2 mt-lg-0">
+            <li class="nav-item mx-lg-5 my-sm-2 my-xs-2">
+                <a class="btn btn-primary new-product-button" role="button" href="{{ path('new_product') }}">
+                    <i class="fas fa-plus"></i>Upload product
+                </a>
+            </li>
+        {% if app.user is null %}
+
             <li class="nav-item">
                 <a class="nav-link" href="{{ path('login') }}">Sign in</a>
             </li>
-            <span class="navbar-text"> or</span>
+            <span class="navbar-text "> or</span>
             <li class="nav-item">
                 <a class="nav-link" href="{{ path('register_user') }}">Sign up</a>
             </li>
+
+        {% else %}
+            <li class="nav-item mx-lg-5 my-sm-2 my-xs-2">
+                <a class="btn btn-primary" role="button" href="{{ path('user_profile') }}">{{ app.user.name }}</a>
+            </li>
+        {% endif %}
+
         </ul>
 
-    {% else %}
-        <a class="btn btn-primary" role="button" href="{{ path('user_profile') }}">{{ app.user.name }}</a>
-    {% endif %}
+    </div>
 </nav>

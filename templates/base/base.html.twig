@@ -21,7 +21,9 @@
     <body style="background-color: #f1f6f6">
     {% include 'base/navBar.html.twig' %}
     <div class="body">
-        {% block body %}{% endblock %}
+        <div class="container-fluid">
+            {% block body %}{% endblock %}
+        </div>
     </div>
         {% block javascripts %}
             <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>

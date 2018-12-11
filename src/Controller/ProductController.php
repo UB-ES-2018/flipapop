@@ -9,6 +9,7 @@
 namespace App\Controller;
 
 
+use App\Entity\Category;
 use App\Entity\Product;
 use App\Form\Type\ProductType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
