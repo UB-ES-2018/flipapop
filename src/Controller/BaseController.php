@@ -8,7 +8,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use function sizeof;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Debug\Debug;
 
+Debug::enable();
 /**
  * Class BaseController
  * @package App\Controller
