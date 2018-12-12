@@ -17,7 +17,6 @@ final class Version20181123113317 extends AbstractMigration
         
         $this->addSql('ALTER TABLE product ADD sold BOOLEAN DEFAULT FALSE ');
         $this->addSql('ALTER TABLE product ALTER visibility DROP DEFAULT');
-
     }
 
     public function down(Schema $schema) : void

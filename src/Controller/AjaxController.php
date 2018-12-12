@@ -49,6 +49,10 @@ class AjaxController extends AbstractController
             $id = $request->request->get('id');
             $product = $em->getRepository(Product::class)->find($id);
 
+            if(is_null($user)){
+                return $this->redirectToRoute('landing_page');
+            }
+
             if ($product->isLikedBy($user)) {
                 $product->removeLikedUser($user);
             } else {
@@ -135,16 +139,18 @@ class AjaxController extends AbstractController
      * @Route("/sell/product", name="ajax_sell_product", options={"expose"=true})
      */
     public function sellProduct(Request $request){
-        $em = $this->getDoctrine()->getManager();
-        
-        $id = $request->request->get('id');
-        $product = $em->getRepository(Product::class)->find($id);
-        $product->changeSold();
-        $em->persist($product);
-        $em->flush();
+        if($request->isXmlHttpRequest()){
+            $em = $this->getDoctrine()->getManager();
 
-        return new JsonResponse(['sold' => $product->getSold()], 200);
+            $id = $request->request->get('id');
+            $product = $em->getRepository(Product::class)->find($id);
+            $product->changeSold();
+            $em->persist($product);
+            $em->flush();
 
+            return new JsonResponse(['sold' => $product->getSold()], 200);
+        }
+        return $this->redirectToRoute('landing_page');
     }
 
     /**

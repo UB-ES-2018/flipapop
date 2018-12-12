@@ -29,6 +29,7 @@ abstract class BaseFixture extends Fixture
         $this->loadData($manager);
     }
 
+
     protected function createMany(string $className, int $count, callable $factory)
 
     {
