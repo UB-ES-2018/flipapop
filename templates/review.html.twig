@@ -1,0 +1,47 @@
+
+
+<div class="row review">
+    <div class="col-1" style="margin-right: 8px">
+        <div class="comment-dot-image">
+            {%  if review.reviwer.image.name is not null %}
+                <img class="comment-user-image" src="{{ vich_uploader_asset(review.reviwer, 'imageFile') }}">
+            {% else %}
+                <i class="fas fa-user comment-empty-user-image" style="color: white"></i>
+            {% endif %}
+        </div>
+    </div>
+    <div class="col-10" style="padding-left: 30px">
+        <div class="row review-user">
+            <div class="review-user-name">
+                {{ review.reviwer.getFullUserName }}
+            </div>
+            {% set stars_left = 5-review.stars %}
+            <div class='user-stars'>
+                <ul>
+                    {% for i in 1..review.stars %}
+
+                    <li class='star selected' data-value='1'>
+                        <i class='fa fa-star fa-fw'></i>
+                    </li>
+                    {% endfor %}
+                    {% if stars_left > 0 %}
+                    {% for starleft in 1..stars_left %}
+                    <li class='star' data-value='1'>
+                        <i class='fa fa-star fa-fw'></i>
+                    </li>
+                    {% endfor %}
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+        <div class="row review-text-answer">
+            <div class="col review-text">
+                {{ review.text }}
+            </div>
+        </div>
+    </div>
+    <div class="row review-date">
+        {{ review.fechaCreacion | date('Y-m-d H:i') }}
+    </div>
+</div>
+
