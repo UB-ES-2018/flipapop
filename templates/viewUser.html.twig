@@ -1,0 +1,180 @@
+{% extends 'base/base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/profile.css') }}" >
+{% endblock %}
+{% block body %}
+    <div class="row-fluid">
+        <div class="row view-user">
+            <div class="dot-image_user_profile">
+                {%  if user.image is not null%}
+                    <img class="user-profile-image" src="{{ vich_uploader_asset(user, 'imageFile') }}">
+                {% endif %}
+            </div>
+            <div class="col-3">
+                <div class="row-fluid name-surname-holder-big">
+                    <b>{{ user.getFullUserName() }}</b>
+                </div>
+                <div class="row-fluid" style="font-size: 1.2rem">
+                    {{ user.products.count() }}<b>products</b>
+                </div>
+            </div>
+            <div class="col-8">
+                <p style="font-weight: lighter; margin-bottom: 0">About me:</p>
+                <p style="font-weight: lighter">{{ user.description }}</p>
+            </div>
+        </div>
+
+        <div class="row">
+            {% include 'userReviews.html.twig' %}
+            <div class="col">
+                <div class="row">
+                    {% for product in user.products %}
+                        {% if product.canView(app.user) %}
+                            <div class="col-md-4 cardholder">
+                                {% include 'cards/productCard.html.twig' %}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
+
+
+
+
+
+{% block javascripts %}
+
+    <script type="text/javascript">
+
+        var rating = 0;
+        var userID = {{ user.id| raw }};
+        {% if app.user %}
+         var reviwerID = {{ app.user.id | raw }};
+        {% else %}
+        var reviwerID;
+        {% endif %}
+        $(document).ready(function(){
+
+            /* 1. Visualizing things on Hover - See next part for action on click */
+            $('#stars li').on('mouseover', function(){
+                var onStar = parseInt($(this).data('value'), 10); // The star currently mouse on
+
+                // Now highlight all the stars that's not after the current hovered star
+                $(this).parent().children('li.star').each(function(e){
+                    if (e < onStar) {
+                        $(this).addClass('hover');
+                    }
+                    else {
+                        $(this).removeClass('hover');
+                    }
+                });
+
+            }).on('mouseout', function(){
+                $(this).parent().children('li.star').each(function(e){
+                    $(this).removeClass('hover');
+                });
+            });
+
+
+            /* 2. Action to perform on click */
+            $('#stars li').on('click', function(){
+                var onStar = parseInt($(this).data('value'), 10); // The star currently selected
+                var stars = $(this).parent().children('li.star');
+
+                for (i = 0; i < stars.length; i++) {
+                    $(stars[i]).removeClass('selected');
+                }
+
+                for (i = 0; i < onStar; i++) {
+                    $(stars[i]).addClass('selected');
+                }
+
+                // JUST RESPONSE (Not needed)
+                rating = parseInt($('#stars li.selected').last().data('value'), 10);
+
+            });
+
+
+        });
+
+        $('#newReview').click(function (e) {
+            e.preventDefault();
+            var text = $('#comment-text').val();
+            if(text !== ""){
+                $.ajax({
+                    type: "POST",
+                    url: '{{ path('ajax_add_review') }}',
+                    data: {user: userID, reviwer: reviwerID, text: text, stars: rating},
+                    dataType: "json"
+                }).done(function (data) {
+                    $('#comment-text').val("");
+                    appendReview(data[0]);
+                });
+            }
+
+        });
+
+        function appendReview(data) {
+            var newComment ='<div class="row ">' +
+            '    <div class="col-1" style="margin-right: 8px">' +
+            '        <div class="comment-dot-image">' +
+            '            {% if app.user is not null %}' +
+            '                <img class="comment-user-image" src="{{ vich_uploader_asset(app.user, 'imageFile') }}">' +
+            '            {% else %}' +
+            '                <i class="fas fa-user comment-empty-user-image" style="color: white"></i>' +
+            '            {% endif %}' +
+            '        </div>' +
+            '        <div class="stars-outer">' +
+            '            <div class="stars-inner"></div>' +
+            '        </div>' +
+            '    </div>' +
+            '    <div class="col review" style="padding-left: 30px">' +
+            '        <div class="row">' +
+            '            <div class="review-user-name">' +
+            '            </div>' +
+            '            <div class="user-stars">' +
+            '                <ul>';
+            for(i = 0; i < data['stars']; i++){
+                newComment = newComment + '<li class="star selected" >' +
+                    '<i class="fa fa-star fa-fw"></i>' +
+                    '</li>';
+            }
+            for(i = 0; i < 5-data['stars']; i++){
+                newComment = newComment + '<li class="star">' +
+                    '<i class="fa fa-star fa-fw"></i>' +
+                    '</li>';
+            }
+            newComment = newComment + '</ul>' +
+            '            </div>' +
+            '        </div>' +
+            '        <div class="row">' +
+            '            <div class="col review-text">' +
+            '            </div>' +
+            '        </div>' +
+            '    </div>' +
+            '    <div class="row review-date">' +
+            '    </div>' +
+            '</div>';
+
+            newComment = $(newComment);
+            newComment.find('.review-user-name').first().html(data.name);
+            newComment.find('.review-text').first().html(data.text);
+            newComment.children('.review-date').html(data.datetime);
+            $('#reviews').append(newComment);
+            $('#stars').children().each(function () {
+                $(this).removeClass('selected');
+            })
+        }
+
+
+
+
+
+    </script>
+{% endblock %}

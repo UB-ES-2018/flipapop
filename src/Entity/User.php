@@ -97,6 +97,17 @@ class User implements UserInterface, Serializable
     private $comentarioProductos;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\UserReview", mappedBy="usuario", orphanRemoval=true)
+     * @ORM\OrderBy({"id" = "ASC"})
+     */
+    private $reviews;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\UserReview", mappedBy="reviwer", orphanRemoval=true)
+     */
+    private $doneReviews;
+
+    /**
      * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
      * of 'UploadedFile' is injected into this setter to trigger the  update. If this
      * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
@@ -137,6 +148,8 @@ class User implements UserInterface, Serializable
         $this->image = new EmbeddedFile();
         $this->likedProducts = new ArrayCollection();
         $this->comentarioProductos = new ArrayCollection();
+        $this->reviews = new ArrayCollection();
+        $this->doneReviews = new ArrayCollection();
     }
 
 
@@ -353,6 +366,68 @@ class User implements UserInterface, Serializable
 
     public function getFullUserName(){
         return $this->name." ".$this->surname;
+    }
+
+    /**
+     * @return Collection|UserReview[]
+     */
+    public function getReviews(): Collection
+    {
+        return $this->reviews;
+    }
+
+    public function addReview(UserReview $review): self
+    {
+        if (!$this->reviews->contains($review)) {
+            $this->reviews[] = $review;
+            $review->setUsuario($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReview(UserReview $review): self
+    {
+        if ($this->reviews->contains($review)) {
+            $this->reviews->removeElement($review);
+            // set the owning side to null (unless already changed)
+            if ($review->getUsuario() === $this) {
+                $review->setUsuario(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|UserReview[]
+     */
+    public function getDoneReviews(): Collection
+    {
+        return $this->doneReviews;
+    }
+
+    public function addDoneReview(UserReview $doneReview): self
+    {
+        if (!$this->doneReviews->contains($doneReview)) {
+            $this->doneReviews[] = $doneReview;
+            $doneReview->setReviwer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDoneReview(UserReview $doneReview): self
+    {
+        if ($this->doneReviews->contains($doneReview)) {
+            $this->doneReviews->removeElement($doneReview);
+            // set the owning side to null (unless already changed)
+            if ($doneReview->getReviwer() === $this) {
+                $doneReview->setReviwer(null);
+            }
+        }
+
+        return $this;
     }
 
 }

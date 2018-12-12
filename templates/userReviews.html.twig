@@ -1,0 +1,40 @@
+<div class="col-sm-1 col-lg-5 reviews-block">
+    <h4>Reviews</h4>
+    <div id="reviews">
+        {% for review in user.reviews %}
+            {% include 'review.html.twig' %}
+        {% endfor %}
+    </div>
+    {% if app.user and user.id != app.user.id%}
+        <div class="row-fluid" style="margin-top: 16px">
+            <!-- Rating Stars Box -->
+            <div class='rating-stars'>
+                <ul id='stars'>
+                    <li class='star' data-value='1'>
+                        <i class='fa fa-star fa-fw'></i>
+                    </li>
+                    <li class='star'  data-value='2'>
+                        <i class='fa fa-star fa-fw'></i>
+                    </li>
+                    <li class='star'  data-value='3'>
+                        <i class='fa fa-star fa-fw'></i>
+                    </li>
+                    <li class='star'  data-value='4'>
+                        <i class='fa fa-star fa-fw'></i>
+                    </li>
+                    <li class='star'  data-value='5'>
+                        <i class='fa fa-star fa-fw'></i>
+                    </li>
+                </ul>
+            </div>
+            <form id="commentForm">
+                <div class="form-group">
+                    <textarea class="form-control" id="comment-text" placeholder="Tell everyone about this user..." rows="4"></textarea>
+                </div>
+                <button type="button" id="newReview" class="btn btn-outline-primary">COMMENT</button>
+            </form>
+        </div>
+        <br>
+    {% endif %}
+    <br>
+</div>

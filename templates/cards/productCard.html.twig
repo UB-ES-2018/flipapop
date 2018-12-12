@@ -2,7 +2,7 @@
     <div class="card">
         <div class="image-holder">
             {%  if product.image is not null%}
-                <img id="side-bar-profile-image" src="{{ vich_uploader_asset(product, 'imageFile') }}" height="100%">
+                <img src="{{ vich_uploader_asset(product, 'imageFile') }}" height="100%">
             {% endif %}
         </div>
         <div class="card-bottom">

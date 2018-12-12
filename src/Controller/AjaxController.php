@@ -7,6 +7,7 @@ use App\Entity\ComentarioProducto;
 use App\Entity\Product;
 
 use App\Entity\User;
+use App\Entity\UserReview;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -47,6 +48,10 @@ class AjaxController extends AbstractController
             $user = $this->getUser();
             $id = $request->request->get('id');
             $product = $em->getRepository(Product::class)->find($id);
+
+            if(is_null($user)){
+                return $this->redirectToRoute('landing_page');
+            }
 
             if ($product->isLikedBy($user)) {
                 $product->removeLikedUser($user);
@@ -134,16 +139,53 @@ class AjaxController extends AbstractController
      * @Route("/sell/product", name="ajax_sell_product", options={"expose"=true})
      */
     public function sellProduct(Request $request){
-        $em = $this->getDoctrine()->getManager();
-        
-        $id = $request->request->get('id');
-        $product = $em->getRepository(Product::class)->find($id);
-        $product->changeSold();
-        $em->persist($product);
-        $em->flush();
+        if($request->isXmlHttpRequest()){
+            $em = $this->getDoctrine()->getManager();
 
-        return new JsonResponse(['sold' => $product->getSold()], 200);
+            $id = $request->request->get('id');
+            $product = $em->getRepository(Product::class)->find($id);
+            $product->changeSold();
+            $em->persist($product);
+            $em->flush();
 
+            return new JsonResponse(['sold' => $product->getSold()], 200);
+        }
+        return $this->redirectToRoute('landing_page');
     }
 
+    /**
+     * @param Request $request
+     * @Route("/add/review", name="ajax_add_review", options={"expose"=true})
+     */
+    public function addReview(Request $request){
+        if($request->isXmlHttpRequest()){
+            $idUser = $request->request->get('user');
+            $idReviwer = $request->request->get('reviwer');
+            $text  = $request->request->get('text');
+            $stars = $request->request->get('stars');
+            $em = $this->getDoctrine()->getManager();
+
+            $user = $em->getRepository(User::class)->find($idUser);
+            $reviwer = $em->getRepository(User::class)->find($idReviwer);
+
+            $comment = new UserReview();
+            $comment->setFechaCreacion(new DateTime());
+            $comment->setReviwer($reviwer);
+            $comment->setUsuario($user);
+            $comment->setText($text);
+            $comment->setStars($stars);
+
+            $em->persist($comment);
+            $em->flush();
+            $data = [
+                'id' => $comment->getId(),
+                'name' => $comment->getReviwer()->getFullUserName(),
+                'text' => $comment->getText(),
+                'stars' => $comment->getStars(),
+                'datetime' => $comment->getFechaCreacion()->format('Y-m-d H:i'),
+            ];
+            return new JsonResponse([$data],200);
+        }
+    return $this->redirectToRoute('landing_page');
+    }
 }
