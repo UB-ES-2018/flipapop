@@ -47,8 +47,7 @@ class AjaxControllerTest extends WebTestCase
 
     }
 
-    /**
-     */
+
     public function testCambiarVisibilidadProducto()
     {
         $this->client = static::createClient();
@@ -83,9 +82,7 @@ class AjaxControllerTest extends WebTestCase
 
     }
 
-    /**
-     *
-     */
+
     public function testLikeProduct()
     {
         $this->client = static::createClient();
@@ -108,9 +105,7 @@ class AjaxControllerTest extends WebTestCase
         $this->assertEquals("POST", $this->client->getRequest()->getMethod());
     }
 
-    /**
-     *
-     */
+
     public function testAddComment()
     {
         $this->client = static::createClient();

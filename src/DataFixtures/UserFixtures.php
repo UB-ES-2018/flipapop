@@ -42,19 +42,6 @@ class UserFixtures extends BaseFixture
         });
 
 
-        $this->createMany(User::class, 1, function (User $user,$i) {
-            $user->setEmail('pmartinez@prueba.com');
-            $user->setPassword($this->passwordEncoder->encodePassword(
-                $user,
-                'randomPassword'
-            ));
-            $user->setName('Pablo');
-            $user->setDescription('Alegre y amigo de mis amigos.');
-            $user->setSurname('Martinez');
-            return $user;
-        });
-
-
         $manager->flush();
     }
 
