@@ -4,31 +4,25 @@
     <link rel="stylesheet" href="{{ asset('css/profile.css') }}" >
 {% endblock %}
 {% block body %}
-    <div class="row">
-        <div class="row col-md-12 view-user">
-            <table style="width:100%">
-                <td style="width:3%">
-                    <div class="dot-image_user_profile">
-                        {%  if user.image is not null%}
-                            <img id="side-bar-profile-image" src="{{ vich_uploader_asset(user, 'imageFile') }}">
-                        {% endif %}
-                    </div>
-                </td>
-                <td style="width:40%" >
-                    <div id="user_name" class="name-surname-holder-big">
-                        <b>{{ user.getFullUserName() }}</b>
-                    </div>
-                </td>
-                <td style="width:7%">
-                    <div align="center" > <b>{{ user.products.count() }}</b></div> <div align="center"> {{ "products" }}</div>
-                </td>
-                <td style="width:50%"> </td>
-            </table>
-            <div class="card-bottom">
-                <spam> <b>{{"User's descripcion:  " }} </b></spam>
-                <spam class="description-holder"> {{ user.description }} </spam>
+    <div class="row-fluid">
+        <div class="row view-user">
+            <div class="dot-image_user_profile">
+                {%  if user.image is not null%}
+                    <img class="user-profile-image" src="{{ vich_uploader_asset(user, 'imageFile') }}">
+                {% endif %}
             </div>
-
+            <div class="col-3">
+                <div class="row-fluid name-surname-holder-big">
+                    <b>{{ user.getFullUserName() }}</b>
+                </div>
+                <div class="row-fluid" style="font-size: 1.2rem">
+                    {{ user.products.count() }}<b>products</b>
+                </div>
+            </div>
+            <div class="col-8">
+                <p style="font-weight: lighter; margin-bottom: 0">About me:</p>
+                <p style="font-weight: lighter">{{ user.description }}</p>
+            </div>
         </div>
         <div class="row">
             {% for product in user.products %}

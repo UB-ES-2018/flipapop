@@ -7,6 +7,7 @@ use App\Entity\User;
 use App\Form\Type\UserProfileType;
 use App\Form\Type\UserType;
 use App\Security\LoginFormAuthenticator;
+use Exception;
 use function is_null;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -107,7 +108,7 @@ class UserController extends AbstractController
     /**
      * @param Request $request
      * @param $idUser
-     * @Route("/user/{idUser}", name="view_user")
+     * @Route("/view/user/{idUser}", name="view_user")
      */
     public function viewUser(Request $request, $idUser){
         if(is_null($idUser)){

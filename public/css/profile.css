@@ -208,3 +208,24 @@
 .active .dot-image {
     background-color: #13c1ac;
 }
+
+
+.dot-image_user_profile {
+
+    background-color: #a3a3a3;
+    border-radius: 50%;
+    display: inline-block;
+    overflow: hidden;
+    border: 1px solid;
+    border-color: #fff;
+    width: 80px;
+    height: 80px;
+    margin-right: 16px;
+
+
+}
+
+.user-profile-image{
+    width: 80px;
+    height: 80px;
+}

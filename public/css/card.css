@@ -28,11 +28,8 @@
 .view-user {
     margin-left: 40px;
     margin-right: 40px;
-    margin-bottom: 40px;
-    transition: 0.3s;
-    padding-left:16px;
-    padding-right:16px;
-    padding-top:16px;
+    margin-bottom: 16px;
+    padding: 16px;
     border-radius: 10px;
     box-shadow: 0 0 2px 0 rgba(0,0,0,.1);
     background-color: white;
@@ -41,10 +38,9 @@
 
 .name-surname-holder-big{
     padding-top: 10px;
-    font-family: sans-serif;
     font-weight: lighter;
     font-size: x-large;
-
+    margin-bottom: 16px;
 }
 
 .price-holder-big{
@@ -164,17 +160,6 @@
     color: red;
 }
 
-.dot-image_user_profile {
-
-    background-color: #a3a3a3;
-    border-radius: 50%;
-    display: inline-block;
-    overflow: hidden;
-    border: 1px solid;
-    border-color: #fff;
-    display: inline-block;
-
-}
 
 
 .dot-image {
