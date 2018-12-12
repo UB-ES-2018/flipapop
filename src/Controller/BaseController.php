@@ -14,7 +14,7 @@ use Symfony\Component\Debug\Debug;
 /**
  * Class BaseController
  * @package App\Controller
- * @Route("/index")
+ * @Route("/")
  */
 class BaseController extends AbstractController
 {
