@@ -34,6 +34,7 @@ class UserControllerTest extends WebTestCase
 
         $metadatas = $entityManager->getMetadataFactory()->getAllMetadata();
         $schemaTool = new SchemaTool($entityManager);
+        $schemaTool->dropSchema($metadatas);
         $schemaTool->updateSchema($metadatas);
 
         $encoder = $container->get('security.user_password_encoder.generic');
@@ -45,7 +46,6 @@ class UserControllerTest extends WebTestCase
 
 
         $this->user = $userRepository->getRandomUser();
-
         $fixture = new ProductFixtures($userRepository);
         $fixture->load($entityManager);
 
@@ -78,12 +78,41 @@ class UserControllerTest extends WebTestCase
         $form['user[plainPassword][second]'] = '1234pepito';
         $crawler = $this->client->submit($form);
 
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
         $this->assertEquals("POST", $this->client->getRequest()->getMethod());
 
         
 
 
+
+    }
+
+    /**
+     */
+    public function testProfile(){
+
+        $this->client = static::createClient();
+
+        //Si no estamos logueados la pagina de perfil nos redirige a login
+        $crawler = $this->client->request('GET', '/profile');
+        $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
+
+        $container = self::$container;
+        $doctrine = $container->get('doctrine');
+        $entityManager = $doctrine->getManager();
+        $userRepository = $entityManager->getRepository(User::class);
+        $this->user = $userRepository->getRandomUser();
+        #dd($this->user);
+        $this->logIn();
+        $crawler = $this->client->request('GET', '/profile');
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+
+        /*$text = $crawler->text();
+        dd($crawler->filter('div:contains"@"'));
+        $this->assertEquals(
+            2,
+            $crawler->filter($this->user->getName())->count()
+        );*/
 
     }
 
@@ -104,7 +133,5 @@ class UserControllerTest extends WebTestCase
         //miramos si la redireccion es correcta
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
     }
-
-
 
 }

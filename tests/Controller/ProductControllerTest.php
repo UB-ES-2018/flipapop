@@ -27,7 +27,8 @@ class ProductControllerTest extends WebTestCase
      */
     protected $client;
 
-    public function setUp() {
+    public function setUp()
+    {
         $this->client = static::createClient();
         $container = self::$container;
         $doctrine = $container->get('doctrine');
@@ -35,6 +36,7 @@ class ProductControllerTest extends WebTestCase
 
         $metadatas = $entityManager->getMetadataFactory()->getAllMetadata();
         $schemaTool = new SchemaTool($entityManager);
+        $schemaTool->dropSchema($metadatas);
         $schemaTool->updateSchema($metadatas);
 
         $encoder = $container->get('security.user_password_encoder.generic');
@@ -99,7 +101,8 @@ class ProductControllerTest extends WebTestCase
      *
      * Log in de un usuario cualquiera cargado de las Fixtures
      */
-    protected function logIn(){
+    protected function logIn()
+    {
         $crawler = $this->client->request('GET', '/login');
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
         $form = $crawler->selectButton('login')->form();
@@ -112,5 +115,42 @@ class ProductControllerTest extends WebTestCase
     }
 
 
+    /**
+     */
+    public function testNewProduct()
+    {
+        //Primero pruebo que la vista de crear producto devuelva un 302 si no se esta logueado (OK)
+        $this->client = static::createClient();
+
+        $crawler = $this->client->request('GET', '/product/new');
+
+        $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
+
+        //Logueamos
+        $this->logIn();
+
+        //volvemos a intentar crear un producto y comprobamos que la respuesta sea 200(OK) y que se muestren los campos esperados
+        $crawler = $this->client->request('GET', '/product/new');
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+
+
+        //comprobamos que puede introducir datos en el formulario de nuevo producto
+        $this->assertGreaterThan(
+            0,
+            $crawler->filter('#product_name')->count()
+        );
+
+        //Seleccionamos el formulario mediante un selector por id de un input del formulario
+        $form = $crawler->filter('#submit')->form();
+        $form['product[name]'] = "Mesa Redonda";
+        $form['product[price]'] = '5';
+        $form['product[description]'] = 'Mesa redonda de madera blanca. Está prácticamente nueva, la compré por 20€.';
+        $crawler = $this->client->submit($form);
+
+        $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals("POST", $this->client->getRequest()->getMethod());
+
+
+    }
 
 }
