@@ -1,6 +1,5 @@
 <?php
 
-use App\Controller\ProductController;
 use App\DataFixtures\ProductFixtures;
 use App\DataFixtures\UserFixtures;
 use App\Entity\User;
@@ -16,7 +15,8 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
  * Time: 15:31
  */
 
-class UserControllerTest extends WebTestCase{
+class UserControllerTest extends WebTestCase
+{
     /**
      * @var User
      */
@@ -57,7 +57,7 @@ class UserControllerTest extends WebTestCase{
     {
         //Primero pruebo que la vista de producto devuelva un 200 sin estar logueado (OK)
         $this->client = static::createClient();
-    $crawler = $this->client->request('GET', '/user/1');
+    $crawler = $this->client->request('GET', '/view/user/1');
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
         $this->assertEquals("GET", $this->client->getRequest()->getMethod());
@@ -138,6 +138,5 @@ class UserControllerTest extends WebTestCase{
         //miramos si la redireccion es correcta
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
     }
-       
 
 }
