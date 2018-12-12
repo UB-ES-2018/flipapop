@@ -8,11 +8,14 @@
         <div class="col-sm col-md col-lg-6  view-product">
             <table style="width:100%">
                 <td style="width:10%">
-                    <div class="product-dot-image">
-                        {%  if product.usuario.image is not null%}
-                            <img class="product-user-image" src="{{ vich_uploader_asset(product.usuario, 'imageFile') }}">
-                        {% endif %}
-                    </div>
+                    <a href="{{ path('user_profile', {'id'}) }}">
+                        <div class="product-dot-image">
+                            {%  if product.usuario.image is not null%}
+                                <img class="product-user-image" src="{{ vich_uploader_asset(product.usuario, 'imageFile') }}">
+                            {% endif %}
+                        </div>
+                    </a>
+
                 </td>
 
 
