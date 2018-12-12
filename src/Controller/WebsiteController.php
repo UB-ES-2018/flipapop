@@ -10,10 +10,10 @@ namespace App\Controller;
 
 
 use App\Entity\Product;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
 class WebsiteController extends AbstractController
 {
@@ -35,7 +35,7 @@ class WebsiteController extends AbstractController
         // We loop on them
         foreach ($products as $product) {
             if($product->getVisibility()==1){
-                $urls[] = ['loc' => $this->get('router')->generate('view_product', array('idProduct' => $product->getId())), 'changefreq' => 'weekly', 'priority' => '1.0'];
+                $urls[] = ['loc' => $this->get('router')->generate('view_product', array('idProducto' => $product->getId())), 'changefreq' => 'weekly', 'priority' => '1.0'];
             }
         }
 

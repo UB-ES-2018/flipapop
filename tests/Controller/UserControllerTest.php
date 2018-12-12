@@ -1,11 +1,13 @@
 <?php
 
+use App\Controller\ProductController;
 use App\DataFixtures\ProductFixtures;
 use App\DataFixtures\UserFixtures;
 use App\Entity\User;
 use Doctrine\ORM\Tools\SchemaTool;
 use Symfony\Bundle\FrameworkBundle\Client;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+
 
 /**
  * Created by PhpStorm.
@@ -14,8 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
  * Time: 15:31
  */
 
-class UserControllerTest extends WebTestCase
-{
+class UserControllerTest extends WebTestCase{
     /**
      * @var User
      */
@@ -51,13 +52,21 @@ class UserControllerTest extends WebTestCase
 
     }
 
-    /**
-     */
-    public function testRegister()
+
+    public function testViewUser()
     {
         //Primero pruebo que la vista de producto devuelva un 200 sin estar logueado (OK)
         $this->client = static::createClient();
+    $crawler = $this->client->request('GET', '/user/1');
 
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals("GET", $this->client->getRequest()->getMethod());
+
+    }
+  
+    /**
+     */
+    public function testRegister(){
 
         $crawler = $this->client->request('GET', '/register');
 
@@ -80,10 +89,6 @@ class UserControllerTest extends WebTestCase
 
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
         $this->assertEquals("POST", $this->client->getRequest()->getMethod());
-
-        
-
-
 
     }
 
@@ -133,5 +138,6 @@ class UserControllerTest extends WebTestCase
         //miramos si la redireccion es correcta
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
     }
+       
 
 }

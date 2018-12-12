@@ -3,12 +3,15 @@
 namespace App\Controller;
 
 
+use function array_merge;
 use FOS\ElasticaBundle\Finder\TransformedFinder;
 use Symfony\Component\Routing\Annotation\Route;
 use function sizeof;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Debug\Debug;
 
+Debug::enable();
 /**
  * Class BaseController
  * @package App\Controller
@@ -21,18 +24,34 @@ class BaseController extends AbstractController
      */
     public function index(Request $request, TransformedFinder $finder){
 
-        $searchData = $request->get('searchbar');
+        $categories_selected = [];
+        if($request->isMethod("POST") and !$request->get('searchbar') and sizeof($request->request->all()) > 0){
+            $products = [];
+            foreach ($request->request->all() as $key => $value){
+                $prod = $this->getDoctrine()->getManager()->getRepository('App:Product')->findBy(["category" => $value]);
+                $products = array_merge($products, $prod);
+            }
+            $categories_selected = $request->request->all();
 
-        $products = [];
-        if(!is_null($searchData) && $searchData !== ''){
-            $products = $finder->find($searchData);
 
+        }else{
+            $searchData = $request->get('searchbar');
+            $products = [];
+            if(!is_null($searchData) && $searchData !== ''){
+                $products = $finder->find($searchData);
+
+            }
+            if(sizeof($products) == 0){
+                $products = $this->getDoctrine()->getManager()->getRepository('App:Product')->findBy(['sold'=>false], ['numLikes'=>'DESC']);
+            }
         }
-        if(sizeof($products) == 0){
-            $products = $this->getDoctrine()->getManager()->getRepository('App:Product')->findBy(['sold'=>false], ['numLikes'=>'DESC']);
-        }
 
-        return $this->render('landingPage.html.twig', ['products' => $products]);
+
+
+
+        $categories = $this->getDoctrine()->getManager()->getRepository('App:Category')->findAll();
+
+        return $this->render('landingPage.html.twig', ['products' => $products, 'categories' => $categories, 'categoriesSelected'=> $categories_selected]);
     }
 
 }

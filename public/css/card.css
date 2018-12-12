@@ -13,8 +13,6 @@
 }
 
 .view-product {
-    margin-left: 32px;
-    margin-right: 32px;
     transition: 0.3s;
     padding-left:16px;
     padding-right:16px;
@@ -25,12 +23,22 @@
 
 }
 
+.view-user {
+    margin-left: 16px;
+    margin-right: 16px;
+    margin-bottom: 16px;
+    padding: 16px;
+    border-radius: 10px;
+    box-shadow: 0 0 2px 0 rgba(0,0,0,.1);
+    background-color: white;
+
+}
+
 .name-surname-holder-big{
     padding-top: 10px;
-    font-family: sans-serif;
     font-weight: lighter;
     font-size: x-large;
-
+    margin-bottom: 16px;
 }
 
 .price-holder-big{
@@ -75,10 +83,11 @@
 .cardholder {
     border-right: 30px;
     margin-right: 15px;
-    margin-left: 15px;
+    margin-left: 40px;
     margin-bottom: 15px;
     text-decoration: none;
-
+    margin-left: 16px;
+    margin-right: 0;
 }
 
 
@@ -150,9 +159,11 @@
     color: red;
 }
 
+
+
 .dot-image {
-    height: 35px;
-    width: 35px;
+    height: 50px;
+    width: 50px;
     background-color: #a3a3a3;
     border-radius: 50%;
     display: inline-block;
@@ -170,3 +181,8 @@
     color: #13C1AC;
 }
 
+
+.product-profile{
+    display: flex;
+    padding: 0 16px;
+}
