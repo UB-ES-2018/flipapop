@@ -1,7 +1,11 @@
 # Read the documentation: https://github.com/FriendsOfSymfony/FOSElasticaBundle/blob/master/Resources/doc/setup.md
 fos_elastica:
     clients:
-        default: { host: http://paas:ab43d4b716df65e94f4f1c58b4f93a93@thorin-us-east-1.searchly.com, port: 9200 }
+       default:
+           host: 95yto5y4gm:8fhuq3xso5@aralia-43814619.us-east-1.bonsai.io
+           port: 80
+           headers: { Authorization: Basic OTV5dG81eTRnbTo4Zmh1cTN4c281 }
+
     indexes:
         app:
           types:
