@@ -51,5 +51,41 @@ class BaseController extends AbstractController
         return $this->render('landingPage.html.twig', ['products' => $products, 'categories' => $categories, 'categoriesSelected'=> $categories_selected]);
     }
 
+    /**
+     * @param Request $request
+     * @Route("/load/categories", name="load_categories")
+     */
+    public function loadCategories(Request $request){
+        $em = $this->getDoctrine()->getManager();
+        $cat = new Category();
+        $cat->setName("Sports and Leisure");
+        $em->persist($cat);
+        $em->flush();
+        $cat = new Category();
+        $cat->setName("Home");
+        $em->persist($cat);
+        $em->flush();
+        $cat = new Category();
+        $cat->setName("Electronics");
+        $em->persist($cat);
+        $em->flush();
+        $cat = new Category();
+        $cat->setName("Fashion and Accessories");
+        $em->persist($cat);
+        $em->flush();
+        $cat = new Category();
+        $cat->setName("Kids and Babies");
+        $em->persist($cat);
+        $em->flush();
+        $cat = new Category();
+        $cat->setName("TV, Audio y Photo");
+        $em->persist($cat);
+        $em->flush();
+        $cat = new Category();
+        $cat->setName("Other");
+        $em->persist($cat);
+        $em->flush();
+        return $this->redirectToRoute('landing_page');
+    }
 
 }
