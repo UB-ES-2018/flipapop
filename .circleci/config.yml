@@ -12,6 +12,8 @@ jobs:
       - image: docker.elastic.co/elasticsearch/elasticsearch:6.5.1
         environment:
           POSTGRES_USER: root
+          AWS_SECRET: OB2gtbbfbs33S5s38B41WVVTvPZIP0atruzg9cFQ
+          AWS_KEY: AKIAIA5X6U6UJ4C2JROQ
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
