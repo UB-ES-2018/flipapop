@@ -50,6 +50,6 @@ class BaseController extends AbstractController
 
         return $this->render('landingPage.html.twig', ['products' => $products, 'categories' => $categories, 'categoriesSelected'=> $categories_selected]);
     }
-    
+
 
 }
