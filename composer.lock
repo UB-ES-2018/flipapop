@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "cf3e22a4d7b09f579b48dfdcce61ba1a",
+    "content-hash": "f17347b85353374349db4c1b3ec13531",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -482,16 +482,16 @@
         },
         {
             "name": "doctrine/dbal",
-            "version": "v2.9.0",
+            "version": "v2.9.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "21fdabe2fc01e004e1966f200d900554876bc63c"
+                "reference": "ec74d6e300d78fbc896669c3ca57ef9719adc9c6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/21fdabe2fc01e004e1966f200d900554876bc63c",
-                "reference": "21fdabe2fc01e004e1966f200d900554876bc63c",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/ec74d6e300d78fbc896669c3ca57ef9719adc9c6",
+                "reference": "ec74d6e300d78fbc896669c3ca57ef9719adc9c6",
                 "shasum": ""
             },
             "require": {
@@ -560,7 +560,7 @@
                 "php",
                 "queryobject"
             ],
-            "time": "2018-12-04T04:39:48+00:00"
+            "time": "2018-12-14T04:51:13+00:00"
         },
         {
             "name": "doctrine/doctrine-bundle",
@@ -1505,6 +1505,56 @@
             "time": "2018-02-07T12:32:48+00:00"
         },
         {
+            "name": "fzaninotto/faker",
+            "version": "v1.8.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fzaninotto/Faker.git",
+                "reference": "f72816b43e74063c8b10357394b6bba8cb1c10de"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/f72816b43e74063c8b10357394b6bba8cb1c10de",
+                "reference": "f72816b43e74063c8b10357394b6bba8cb1c10de",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.3.3 || ^7.0"
+            },
+            "require-dev": {
+                "ext-intl": "*",
+                "phpunit/phpunit": "^4.8.35 || ^5.7",
+                "squizlabs/php_codesniffer": "^1.5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.8-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Faker\\": "src/Faker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "François Zaninotto"
+                }
+            ],
+            "description": "Faker is a PHP library that generates fake data for you.",
+            "keywords": [
+                "data",
+                "faker",
+                "fixtures"
+            ],
+            "time": "2018-07-12T10:23:15+00:00"
+        },
+        {
             "name": "guzzlehttp/guzzle",
             "version": "6.3.3",
             "source": {
@@ -1892,6 +1942,156 @@
                 "yaml"
             ],
             "time": "2018-10-26T12:40:10+00:00"
+        },
+        {
+            "name": "knplabs/gaufrette",
+            "version": "v0.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/KnpLabs/Gaufrette.git",
+                "reference": "a0627e91e8753f442eea6560cb347151cd306b2c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/KnpLabs/Gaufrette/zipball/a0627e91e8753f442eea6560cb347151cd306b2c",
+                "reference": "a0627e91e8753f442eea6560cb347151cd306b2c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6"
+            },
+            "conflict": {
+                "microsoft/windowsazure": "<0.4.3"
+            },
+            "require-dev": {
+                "akeneo/phpspec-skip-example-extension": "~1.2",
+                "amazonwebservices/aws-sdk-for-php": "1.5.*",
+                "aws/aws-sdk-php": "^2.4.12||~3",
+                "doctrine/dbal": ">=2.3",
+                "dropbox-php/dropbox-php": "*",
+                "google/apiclient": "~1.1.3",
+                "league/flysystem": "~1.0",
+                "microsoft/azure-storage-blob": "^1.0",
+                "mikey179/vfsstream": "~1.2.0",
+                "mongodb/mongodb": "^1.1",
+                "phpseclib/phpseclib": "^2.0",
+                "phpspec/phpspec": "~2.4",
+                "phpunit/phpunit": "^5.6.8",
+                "rackspace/php-opencloud": "^1.9.2"
+            },
+            "suggest": {
+                "ext-curl": "*",
+                "ext-fileinfo": "This extension is used to automatically detect the content-type of a file in the AwsS3, OpenCloud, AzureBlogStorage and GoogleCloudStorage adapters",
+                "ext-mbstring": "*",
+                "gaufrette/aws-s3-adapter": "to use AwsS3 adapter (supports SDK v2 and v3)",
+                "gaufrette/azure-blob-storage-adapter": "to use AzureBlobStorage adapter",
+                "gaufrette/doctrine-dbal-adapter": "to use DBAL adapter",
+                "gaufrette/flysystem-adapter": "to use Flysystem adapter",
+                "gaufrette/ftp-adapter": "to use Ftp adapter",
+                "gaufrette/gridfs-adapter": "to use GridFS adapter",
+                "gaufrette/in-memory-adapter": "to use InMemory adapter",
+                "gaufrette/local-adapter": "to use Local adapter",
+                "gaufrette/opencloud-adapter": "to use Opencloud adapter",
+                "gaufrette/phpseclib-sftp-adapter": "to use PhpseclibSftp adapter",
+                "gaufrette/zip-adapter": "to use Zip adapter",
+                "google/apiclient": "to use GoogleCloudStorage adapter",
+                "knplabs/knp-gaufrette-bundle": "to use with Symfony2"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.7.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Gaufrette": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "The contributors",
+                    "homepage": "http://github.com/knplabs/Gaufrette/contributors"
+                },
+                {
+                    "name": "KnpLabs Team",
+                    "homepage": "http://knplabs.com"
+                }
+            ],
+            "description": "PHP library that provides a filesystem abstraction layer",
+            "homepage": "http://knplabs.com",
+            "keywords": [
+                "abstraction",
+                "file",
+                "filesystem",
+                "media"
+            ],
+            "time": "2018-08-30T13:26:15+00:00"
+        },
+        {
+            "name": "knplabs/knp-gaufrette-bundle",
+            "version": "v0.5.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/KnpLabs/KnpGaufretteBundle.git",
+                "reference": "2789249eb5ee8c226e9a0360c2e1f1e1bf05aa29"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/KnpLabs/KnpGaufretteBundle/zipball/2789249eb5ee8c226e9a0360c2e1f1e1bf05aa29",
+                "reference": "2789249eb5ee8c226e9a0360c2e1f1e1bf05aa29",
+                "shasum": ""
+            },
+            "require": {
+                "knplabs/gaufrette": "~0.1.7|~0.2|~0.3|~0.4|~0.5|~0.6",
+                "symfony/config": "~2.1|~3.0|~4.0",
+                "symfony/dependency-injection": "~2.1|~3.0|~4.0",
+                "symfony/framework-bundle": "~2.0|~3.0|~4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.8.35",
+                "symfony/console": "~2.1|~3.0|~4.0",
+                "symfony/filesystem": "~2.1|~3.0|~4.0",
+                "symfony/yaml": "~2.1|~3.0|~4.0"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.5.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Knp\\Bundle\\GaufretteBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "The contributors",
+                    "homepage": "https://github.com/knplabs/KnpGaufretteBundle/contributors"
+                },
+                {
+                    "name": "Antoine Hérault",
+                    "email": "antoine.herault@gmail.com"
+                }
+            ],
+            "description": "Allows to easily use the Gaufrette library in a Symfony project",
+            "homepage": "http://knplabs.com",
+            "keywords": [
+                "abstraction",
+                "file",
+                "filesystem",
+                "media"
+            ],
+            "time": "2018-05-04T08:37:13+00:00"
         },
         {
             "name": "league/flysystem",
@@ -2895,6 +3095,28 @@
             ],
             "description": "A security checker for your composer.lock",
             "time": "2018-12-10T06:08:43+00:00"
+        },
+        {
+            "name": "symfony/apache-pack",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/apache-pack.git",
+                "reference": "3aa5818d73ad2551281fc58a75afd9ca82622e6c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/apache-pack/zipball/3aa5818d73ad2551281fc58a75afd9ca82622e6c",
+                "reference": "3aa5818d73ad2551281fc58a75afd9ca82622e6c",
+                "shasum": ""
+            },
+            "type": "symfony-pack",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A pack for Apache support in Symfony",
+            "time": "2017-12-12T01:46:35+00:00"
         },
         {
             "name": "symfony/asset",
@@ -4042,16 +4264,16 @@
         },
         {
             "name": "symfony/maker-bundle",
-            "version": "v1.9.0",
+            "version": "v1.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/maker-bundle.git",
-                "reference": "e873047b6022a0343c9354f65d5d47b9e351dd53"
+                "reference": "aa37ea1323ac888913bdd3e5f83d846798729449"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/e873047b6022a0343c9354f65d5d47b9e351dd53",
-                "reference": "e873047b6022a0343c9354f65d5d47b9e351dd53",
+                "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/aa37ea1323ac888913bdd3e5f83d846798729449",
+                "reference": "aa37ea1323ac888913bdd3e5f83d846798729449",
                 "shasum": ""
             },
             "require": {
@@ -4104,7 +4326,7 @@
                 "scaffold",
                 "scaffolding"
             ],
-            "time": "2018-11-03T18:25:11+00:00"
+            "time": "2018-12-13T18:54:47+00:00"
         },
         {
             "name": "symfony/monolog-bridge",
@@ -5835,228 +6057,6 @@
                 "persistence"
             ],
             "time": "2018-11-26T19:40:34+00:00"
-        },
-        {
-            "name": "fzaninotto/faker",
-            "version": "v1.8.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "f72816b43e74063c8b10357394b6bba8cb1c10de"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/f72816b43e74063c8b10357394b6bba8cb1c10de",
-                "reference": "f72816b43e74063c8b10357394b6bba8cb1c10de",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^5.3.3 || ^7.0"
-            },
-            "require-dev": {
-                "ext-intl": "*",
-                "phpunit/phpunit": "^4.8.35 || ^5.7",
-                "squizlabs/php_codesniffer": "^1.5"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.8-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Faker\\": "src/Faker/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "François Zaninotto"
-                }
-            ],
-            "description": "Faker is a PHP library that generates fake data for you.",
-            "keywords": [
-                "data",
-                "faker",
-                "fixtures"
-            ],
-            "time": "2018-07-12T10:23:15+00:00"
-        },
-        {
-            "name": "knplabs/gaufrette",
-            "version": "v0.7.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/KnpLabs/Gaufrette.git",
-                "reference": "a0627e91e8753f442eea6560cb347151cd306b2c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/Gaufrette/zipball/a0627e91e8753f442eea6560cb347151cd306b2c",
-                "reference": "a0627e91e8753f442eea6560cb347151cd306b2c",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.6"
-            },
-            "conflict": {
-                "microsoft/windowsazure": "<0.4.3"
-            },
-            "require-dev": {
-                "akeneo/phpspec-skip-example-extension": "~1.2",
-                "amazonwebservices/aws-sdk-for-php": "1.5.*",
-                "aws/aws-sdk-php": "^2.4.12||~3",
-                "doctrine/dbal": ">=2.3",
-                "dropbox-php/dropbox-php": "*",
-                "google/apiclient": "~1.1.3",
-                "league/flysystem": "~1.0",
-                "microsoft/azure-storage-blob": "^1.0",
-                "mikey179/vfsstream": "~1.2.0",
-                "mongodb/mongodb": "^1.1",
-                "phpseclib/phpseclib": "^2.0",
-                "phpspec/phpspec": "~2.4",
-                "phpunit/phpunit": "^5.6.8",
-                "rackspace/php-opencloud": "^1.9.2"
-            },
-            "suggest": {
-                "ext-curl": "*",
-                "ext-fileinfo": "This extension is used to automatically detect the content-type of a file in the AwsS3, OpenCloud, AzureBlogStorage and GoogleCloudStorage adapters",
-                "ext-mbstring": "*",
-                "gaufrette/aws-s3-adapter": "to use AwsS3 adapter (supports SDK v2 and v3)",
-                "gaufrette/azure-blob-storage-adapter": "to use AzureBlobStorage adapter",
-                "gaufrette/doctrine-dbal-adapter": "to use DBAL adapter",
-                "gaufrette/flysystem-adapter": "to use Flysystem adapter",
-                "gaufrette/ftp-adapter": "to use Ftp adapter",
-                "gaufrette/gridfs-adapter": "to use GridFS adapter",
-                "gaufrette/in-memory-adapter": "to use InMemory adapter",
-                "gaufrette/local-adapter": "to use Local adapter",
-                "gaufrette/opencloud-adapter": "to use Opencloud adapter",
-                "gaufrette/phpseclib-sftp-adapter": "to use PhpseclibSftp adapter",
-                "gaufrette/zip-adapter": "to use Zip adapter",
-                "google/apiclient": "to use GoogleCloudStorage adapter",
-                "knplabs/knp-gaufrette-bundle": "to use with Symfony2"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.7.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Gaufrette": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "The contributors",
-                    "homepage": "http://github.com/knplabs/Gaufrette/contributors"
-                },
-                {
-                    "name": "KnpLabs Team",
-                    "homepage": "http://knplabs.com"
-                }
-            ],
-            "description": "PHP library that provides a filesystem abstraction layer",
-            "homepage": "http://knplabs.com",
-            "keywords": [
-                "abstraction",
-                "file",
-                "filesystem",
-                "media"
-            ],
-            "time": "2018-08-30T13:26:15+00:00"
-        },
-        {
-            "name": "knplabs/knp-gaufrette-bundle",
-            "version": "v0.5.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/KnpLabs/KnpGaufretteBundle.git",
-                "reference": "2789249eb5ee8c226e9a0360c2e1f1e1bf05aa29"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/KnpGaufretteBundle/zipball/2789249eb5ee8c226e9a0360c2e1f1e1bf05aa29",
-                "reference": "2789249eb5ee8c226e9a0360c2e1f1e1bf05aa29",
-                "shasum": ""
-            },
-            "require": {
-                "knplabs/gaufrette": "~0.1.7|~0.2|~0.3|~0.4|~0.5|~0.6",
-                "symfony/config": "~2.1|~3.0|~4.0",
-                "symfony/dependency-injection": "~2.1|~3.0|~4.0",
-                "symfony/framework-bundle": "~2.0|~3.0|~4.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.8.35",
-                "symfony/console": "~2.1|~3.0|~4.0",
-                "symfony/filesystem": "~2.1|~3.0|~4.0",
-                "symfony/yaml": "~2.1|~3.0|~4.0"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.5.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Knp\\Bundle\\GaufretteBundle\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "The contributors",
-                    "homepage": "https://github.com/knplabs/KnpGaufretteBundle/contributors"
-                },
-                {
-                    "name": "Antoine Hérault",
-                    "email": "antoine.herault@gmail.com"
-                }
-            ],
-            "description": "Allows to easily use the Gaufrette library in a Symfony project",
-            "homepage": "http://knplabs.com",
-            "keywords": [
-                "abstraction",
-                "file",
-                "filesystem",
-                "media"
-            ],
-            "time": "2018-05-04T08:37:13+00:00"
-        },
-        {
-            "name": "symfony/apache-pack",
-            "version": "v1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/apache-pack.git",
-                "reference": "3aa5818d73ad2551281fc58a75afd9ca82622e6c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/apache-pack/zipball/3aa5818d73ad2551281fc58a75afd9ca82622e6c",
-                "reference": "3aa5818d73ad2551281fc58a75afd9ca82622e6c",
-                "shasum": ""
-            },
-            "type": "symfony-pack",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "A pack for Apache support in Symfony",
-            "time": "2017-12-12T01:46:35+00:00"
         },
         {
             "name": "symfony/browser-kit",
