@@ -43,5 +43,5 @@ services:
                   version: 'latest'
                   region: eu-west-2
                   credentials:
-                      key: AKIAIA5X6U6UJ4C2JROQ
-                      secret: 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
+                      key: '%env(AWS_KEY)%'
+                      secret: '%env(AWS_SECRET)%'
