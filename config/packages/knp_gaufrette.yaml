@@ -1,0 +1,12 @@
+knp_gaufrette:
+    stream_wrapper: ~
+    adapters:
+        images_adapter:
+            aws_s3:
+                service_id: ct_file_store.s3
+                bucket_name: flipapop-images
+                detect_content_type: true
+
+    filesystems:
+        images_fs:
+            adapter:    images_adapter

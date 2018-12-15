@@ -34,3 +34,14 @@ services:
             autowire: true
 
     FOS\ElasticaBundle\Finder\TransformedFinder: '@fos_elastica.finder.app.product'
+
+    ct_file_store.s3:
+          class: Aws\S3\S3Client
+          factory: [Aws\S3\S3Client, 'factory']
+          arguments:
+              -
+                  version: 'latest'
+                  region: eu-west-2
+                  credentials:
+                      key: AKIAIA5X6U6UJ4C2JROQ
+                      secret: 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
